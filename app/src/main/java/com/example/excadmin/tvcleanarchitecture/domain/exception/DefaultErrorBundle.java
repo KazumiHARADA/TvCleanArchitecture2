@@ -13,15 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.excadmin.tvcleanarchitecture.domain.executor;
-
-import io.reactivex.Scheduler;
+package com.example.excadmin.tvcleanarchitecture.domain.exception;
 
 /**
- * Thread abstraction created to change the execution context from any thread to any other thread.
- * Useful to encapsulate a UI Thread for example, since some job will be done in background, an
- * implementation of this interface will change context and update the UI.
+ *  Wrapper around Exceptions used to manage default errors.
  */
-public interface PostExecutionThread {
-  Scheduler getScheduler();
+public class DefaultErrorBundle implements ErrorBundle {
+
+  private static final String DEFAULT_ERROR_MSG = "Unknown error";
+
+  private final Exception exception;
+
+  public DefaultErrorBundle(Exception exception) {
+    this.exception = exception;
+  }
+
+  @Override
+  public Exception getException() {
+    return exception;
+  }
+
+  @Override
+  public String getErrorMessage() {
+    return (exception != null) ? this.exception.getMessage() : DEFAULT_ERROR_MSG;
+  }
 }

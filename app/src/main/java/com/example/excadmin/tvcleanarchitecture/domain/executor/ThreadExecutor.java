@@ -15,13 +15,11 @@
  */
 package com.example.excadmin.tvcleanarchitecture.domain.executor;
 
-import io.reactivex.Scheduler;
+import java.util.concurrent.Executor;
 
 /**
- * Thread abstraction created to change the execution context from any thread to any other thread.
- * Useful to encapsulate a UI Thread for example, since some job will be done in background, an
- * implementation of this interface will change context and update the UI.
+ * Executor implementation can be based on different frameworks or techniques of asynchronous
+ * execution, but every implementation will execute the
+ * {@link com.fernandocejas.android10.sample.domain.interactor.UseCase} out of the UI thread.
  */
-public interface PostExecutionThread {
-  Scheduler getScheduler();
-}
+public interface ThreadExecutor extends Executor {}
