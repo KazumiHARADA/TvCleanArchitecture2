@@ -11,7 +11,7 @@ import com.example.excadmin.tvcleanarchitecture.data.FetchVideoService;
 import com.example.excadmin.tvcleanarchitecture.data.VideoContract;
 import com.example.excadmin.tvcleanarchitecture.data.VideoDbBuilder;
 import com.example.excadmin.tvcleanarchitecture.data.VideoDbHelper;
-import com.example.excadmin.tvcleanarchitecture.ui.MainActivity;
+import com.example.excadmin.tvcleanarchitecture.presentation.ui.MainActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
