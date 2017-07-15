@@ -50,7 +50,7 @@
         android:logo="@drawable/videos_by_google_banner"
         android:theme="@style/Theme.Leanback">
         <activity
-            android:name=".presentation.ui.MainActivity"
+            android:name=".presentation.ui.activity.MainActivity"
             android:icon="@drawable/videos_by_google_banner"
             android:label="@string/app_name"
             android:logo="@drawable/videos_by_google_banner"
@@ -63,7 +63,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.example.excadmin.tvcleanarchitecture.presentation.ui.MobileWelcomeActivity">
+        <activity android:name="com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.MobileWelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -74,7 +74,7 @@
         <meta-data android:name="android.app.default_searchable"
             android:value=".ui.VideoDetailsActivity" />
         <activity
-            android:name=".presentation.ui.VideoDetailsActivity"
+            android:name=".presentation.ui.activity.VideoDetailsActivity"
             android:exported="true"
             android:theme="@style/Theme.Leanback.Details">
 
@@ -90,19 +90,19 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name=".presentation.ui.PlaybackOverlayActivity"
+            android:name=".presentation.ui.activity.PlaybackOverlayActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|layoutDirection"
             android:launchMode="singleTask"
             android:resizeableActivity="true"
             android:supportsPictureInPicture="true" />
         <activity
-            android:name=".presentation.ui.VerticalGridActivity"
+            android:name=".presentation.ui.activity.VerticalGridActivity"
             android:exported="true"
-            android:parentActivityName=".presentation.ui.MainActivity"
+            android:parentActivityName=".presentation.ui.activity.MainActivity"
             android:theme="@style/Theme.Leanback.VerticalGrid" />
-        <activity android:name=".presentation.ui.SearchActivity" />
+        <activity android:name=".presentation.ui.activity.SearchActivity" />
         <activity
-            android:name=".presentation.ui.GuidedStepActivity"
+            android:name=".presentation.ui.activity.GuidedStepActivity"
             android:theme="@style/Theme.Example.Leanback.GuidedStep" />
 
         <!-- Provides search suggestions for keywords against video metadata. -->
@@ -116,7 +116,7 @@
         </provider>
 
         <receiver
-            android:name="com.example.excadmin.tvcleanarchitecture.service.RecommendationReceiver"
+            android:name=".presentation.service.RecommendationReceiver"
             android:enabled="true"
             android:exported="false">
             <intent-filter>
@@ -125,22 +125,22 @@
         </receiver>
 
         <service
-            android:name="com.example.excadmin.tvcleanarchitecture.service.FetchVideoService"
+            android:name=".presentation.service.FetchVideoService"
             android:exported="false" />
         <service
-            android:name="com.example.excadmin.tvcleanarchitecture.service.UpdateRecommendationsService"
+            android:name=".presentation.service.UpdateRecommendationsService"
             android:enabled="true" />
 
-        <activity android:name=".presentation.ui.OnboardingActivity"
+        <activity android:name=".presentation.ui.activity.OnboardingActivity"
             android:enabled="true"
             android:exported="true"
             android:theme="@style/Theme.Leanback.Onboarding" />
-        <activity android:name=".presentation.ui.SettingsActivity"
+        <activity android:name=".presentation.ui.activity.SettingsActivity"
             android:exported="true"
             android:theme="@style/LeanbackPreferences"
             />
         <activity
-            android:name=".presentation.ui.AuthenticationActivity"
+            android:name=".presentation.ui.activity.AuthenticationActivity"
             android:theme="@style/Theme.Example.Leanback.GuidedStep" />
     </application>
 
