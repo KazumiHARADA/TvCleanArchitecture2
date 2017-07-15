@@ -15,7 +15,7 @@
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.android.tvleanback">
+    package="com.example.excadmin.tvcleanarchitecture">
 
     <permission
         android:name="${applicationId}.ACCESS_VIDEO_DATA"
@@ -27,6 +27,8 @@
     <uses-permission android:name="${applicationId}.ACCESS_VIDEO_DATA" />
     <uses-permission android:name="${applicationId}.ACCESS_MOVIES_DATA" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATET" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
@@ -48,7 +50,7 @@
         android:logo="@drawable/videos_by_google_banner"
         android:theme="@style/Theme.Leanback">
         <activity
-            android:name=".ui.MainActivity"
+            android:name="com.example.excadmin.tvcleanarchitecture.ui.MainActivity"
             android:icon="@drawable/videos_by_google_banner"
             android:label="@string/app_name"
             android:logo="@drawable/videos_by_google_banner"
@@ -61,7 +63,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".mobile.MobileWelcomeActivity">
+        <activity android:name="com.example.excadmin.tvcleanarchitecture.mobile.MobileWelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -72,7 +74,7 @@
         <meta-data android:name="android.app.default_searchable"
             android:value=".ui.VideoDetailsActivity" />
         <activity
-            android:name=".ui.VideoDetailsActivity"
+            android:name="com.example.excadmin.tvcleanarchitecture.ui.VideoDetailsActivity"
             android:exported="true"
             android:theme="@style/Theme.Leanback.Details">
 
@@ -88,24 +90,24 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name=".ui.PlaybackOverlayActivity"
+            android:name="com.example.excadmin.tvcleanarchitecture.ui.PlaybackOverlayActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|layoutDirection"
             android:launchMode="singleTask"
             android:resizeableActivity="true"
             android:supportsPictureInPicture="true" />
         <activity
-            android:name=".ui.VerticalGridActivity"
+            android:name="com.example.excadmin.tvcleanarchitecture.ui.VerticalGridActivity"
             android:exported="true"
-            android:parentActivityName=".ui.MainActivity"
+            android:parentActivityName="com.example.excadmin.tvcleanarchitecture.ui.MainActivity"
             android:theme="@style/Theme.Leanback.VerticalGrid" />
-        <activity android:name=".ui.SearchActivity" />
+        <activity android:name="com.example.excadmin.tvcleanarchitecture.ui.SearchActivity" />
         <activity
-            android:name=".ui.GuidedStepActivity"
+            android:name="com.example.excadmin.tvcleanarchitecture.ui.GuidedStepActivity"
             android:theme="@style/Theme.Example.Leanback.GuidedStep" />
 
         <!-- Provides search suggestions for keywords against video metadata. -->
         <provider
-            android:name=".data.VideoProvider"
+            android:name="com.example.excadmin.tvcleanarchitecture.data.VideoProvider"
             android:authorities="${packageName}"
             android:exported="true">
             <path-permission
@@ -114,7 +116,7 @@
         </provider>
 
         <receiver
-            android:name=".recommendation.RecommendationReceiver"
+            android:name="com.example.excadmin.tvcleanarchitecture.recommendation.RecommendationReceiver"
             android:enabled="true"
             android:exported="false">
             <intent-filter>
@@ -123,22 +125,22 @@
         </receiver>
 
         <service
-            android:name=".data.FetchVideoService"
+            android:name="com.example.excadmin.tvcleanarchitecture.data.FetchVideoService"
             android:exported="false" />
         <service
-            android:name=".recommendation.UpdateRecommendationsService"
+            android:name="com.example.excadmin.tvcleanarchitecture.recommendation.UpdateRecommendationsService"
             android:enabled="true" />
 
-        <activity android:name=".ui.OnboardingActivity"
+        <activity android:name="com.example.excadmin.tvcleanarchitecture.ui.OnboardingActivity"
             android:enabled="true"
             android:exported="true"
             android:theme="@style/Theme.Leanback.Onboarding" />
-        <activity android:name=".ui.SettingsActivity"
+        <activity android:name="com.example.excadmin.tvcleanarchitecture.ui.SettingsActivity"
             android:exported="true"
             android:theme="@style/LeanbackPreferences"
             />
         <activity
-            android:name=".ui.AuthenticationActivity"
+            android:name="com.example.excadmin.tvcleanarchitecture.ui.AuthenticationActivity"
             android:theme="@style/Theme.Example.Leanback.GuidedStep" />
     </application>
 
