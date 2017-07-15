@@ -48,8 +48,8 @@ import android.widget.Toast;
 import com.example.excadmin.tvcleanarchitecture.BuildConfig;
 import com.example.excadmin.tvcleanarchitecture.R;
 import com.example.excadmin.tvcleanarchitecture.data.VideoContract;
-import com.example.excadmin.tvcleanarchitecture.presentation.model.Video;
-import com.example.excadmin.tvcleanarchitecture.presentation.model.VideoCursorMapper;
+import com.example.excadmin.tvcleanarchitecture.domain.model.Video;
+import com.example.excadmin.tvcleanarchitecture.domain.model.VideoCursorMapper;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.adaper.CardPresenter;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.VideoDetailsActivity;
 

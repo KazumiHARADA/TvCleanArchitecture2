@@ -23,7 +23,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.example.excadmin.tvcleanarchitecture.BuildConfig;
-import com.example.excadmin.tvcleanarchitecture.presentation.model.Video;
+import com.example.excadmin.tvcleanarchitecture.domain.model.Video;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.PlaybackOverlayActivity;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.fragment.PlaybackOverlayFragment;
 

@@ -1,14 +1,14 @@
 package com.example.excadmin.tvcleanarchitecture.presentation.presenter;
 
-import com.example.excadmin.tvcleanarchitecture.presentation.ui.MovieListView;
+import com.example.excadmin.tvcleanarchitecture.presentation.ui.VideoListView;
 
 /**
  * Created by haradakazumi on 2017/07/15.
  */
 
-public class MovieListPresenter extends Presenter {
+public class VideoListPresenter extends Presenter {
 
-    private MovieListView mMovieListView;
+    private VideoListView mMovieListView;
 
     @Override
     public void initialize() {

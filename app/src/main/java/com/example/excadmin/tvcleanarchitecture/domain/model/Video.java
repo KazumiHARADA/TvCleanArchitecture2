@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.excadmin.tvcleanarchitecture.presentation.model;
+package com.example.excadmin.tvcleanarchitecture.domain.model;
 
 import android.media.MediaDescription;
 import android.os.Parcel;
