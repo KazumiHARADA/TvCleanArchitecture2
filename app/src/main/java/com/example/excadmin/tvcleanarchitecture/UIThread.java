@@ -13,12 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.excadmin.tvcleanarchitecture.domain.executor;
+package com.example.excadmin.tvcleanarchitecture;
 
-import java.util.concurrent.Executor;
+import com.example.excadmin.tvcleanarchitecture.domain.executor.PostExecutionThread;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 
 /**
- * Executor implementation can be based on different frameworks or techniques of asynchronous
- * execution, but every implementation will execute the
+ * MainThread (UI Thread) implementation based on a {@link Scheduler}
+ * which will execute actions on the Android UI thread
  */
-public interface ThreadExecutor extends Executor {}
+@Singleton
+public class UIThread implements PostExecutionThread {
+
+  @Inject
+  UIThread() {}
+
+  @Override
+  public Scheduler getScheduler() {
+    return AndroidSchedulers.mainThread();
+  }
+}

@@ -13,12 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.excadmin.tvcleanarchitecture.domain.executor;
+package com.example.excadmin.tvcleanarchitecture.domain.interactor;
 
-import java.util.concurrent.Executor;
+import io.reactivex.observers.DisposableObserver;
 
 /**
- * Executor implementation can be based on different frameworks or techniques of asynchronous
- * execution, but every implementation will execute the
+ * Default {@link DisposableObserver} base class to be used whenever you want default error handling.
  */
-public interface ThreadExecutor extends Executor {}
+public class DefaultObserver<T> extends DisposableObserver<T> {
+  @Override public void onNext(T t) {
+    // no-op by default.
+  }
+
+  @Override public void onComplete() {
+    // no-op by default.
+  }
+
+  @Override public void onError(Throwable exception) {
+    // no-op by default.
+  }
+}

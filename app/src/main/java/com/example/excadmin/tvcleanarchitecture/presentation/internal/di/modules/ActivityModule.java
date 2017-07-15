@@ -13,12 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.excadmin.tvcleanarchitecture.domain.executor;
+package com.example.excadmin.tvcleanarchitecture.presentation.internal.di.modules;
 
-import java.util.concurrent.Executor;
+import android.app.Activity;
+
+
+import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.PerActivity;
+
+import dagger.Module;
+import dagger.Provides;
 
 /**
- * Executor implementation can be based on different frameworks or techniques of asynchronous
- * execution, but every implementation will execute the
+ * A module to wrap the Activity state and expose it to the graph.
  */
-public interface ThreadExecutor extends Executor {}
+@Module
+public class ActivityModule {
+  private final Activity activity;
+
+  public ActivityModule(Activity activity) {
+    this.activity = activity;
+  }
+
+  /**
+  * Expose the activity to dependents in the graph.
+  */
+  @Provides
+  @PerActivity
+  Activity activity() {
+    return this.activity;
+  }
+}

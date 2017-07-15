@@ -13,12 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.excadmin.tvcleanarchitecture.domain.executor;
+package com.example.excadmin.tvcleanarchitecture.presentation.internal.di;
 
-import java.util.concurrent.Executor;
+import java.lang.annotation.Retention;
+
+import javax.inject.Scope;
+
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * Executor implementation can be based on different frameworks or techniques of asynchronous
- * execution, but every implementation will execute the
+ * A scoping annotation to permit objects whose lifetime should
+ * conform to the life of the activity to be memorized in the
+ * correct component.
  */
-public interface ThreadExecutor extends Executor {}
+@Scope
+@Retention(RUNTIME)
+public @interface PerActivity {}

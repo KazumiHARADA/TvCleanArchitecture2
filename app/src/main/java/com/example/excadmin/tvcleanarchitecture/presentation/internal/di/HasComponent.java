@@ -13,12 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.excadmin.tvcleanarchitecture.domain.executor;
-
-import java.util.concurrent.Executor;
+package com.example.excadmin.tvcleanarchitecture.presentation.internal.di;
 
 /**
- * Executor implementation can be based on different frameworks or techniques of asynchronous
- * execution, but every implementation will execute the
+ * Interface representing a contract for clients that contains a component for dependency injection.
  */
-public interface ThreadExecutor extends Executor {}
+public interface HasComponent<C> {
+  C getComponent();
+}
