@@ -17,18 +17,14 @@ package com.example.excadmin.tvcleanarchitecture.data.cache.serializer;
 
 import com.google.gson.Gson;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
 /**
  * Json Serializer/Deserializer.
  */
-@Singleton
 public class Serializer {
 
   private final Gson gson = new Gson();
 
-  @Inject Serializer() {}
+  Serializer() {}
 
   /**
    * Serialize an object to Json.

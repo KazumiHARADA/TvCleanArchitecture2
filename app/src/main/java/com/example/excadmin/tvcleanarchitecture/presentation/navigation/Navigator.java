@@ -16,20 +16,20 @@
 package com.example.excadmin.tvcleanarchitecture.presentation.navigation;
 
 import android.content.Context;
-import android.content.Intent;
-
-import javax.inject.Inject;
-import javax.inject.Singleton;
 
 /**
  * Class used to navigate through the application.
  */
-@Singleton
 public class Navigator {
 
-  @Inject
-  public Navigator() {
+  private static Navigator navigator = new Navigator();
+
+  private Navigator() {
     //empty
+  }
+
+  public static Navigator getInstance() {
+    return navigator;
   }
 
   /**
