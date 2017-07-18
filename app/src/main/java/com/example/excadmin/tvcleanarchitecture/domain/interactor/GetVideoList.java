@@ -7,6 +7,8 @@ import com.example.excadmin.tvcleanarchitecture.domain.repository.VideoRepositor
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import io.reactivex.Observable;
 
 /**
@@ -17,7 +19,8 @@ public class GetVideoList extends UseCase<List<Video>,Void> {
 
     private final VideoRepository videoRepository;
 
-    public GetVideoList(VideoRepository videoRepository,ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread) {
+    @Inject
+    GetVideoList(VideoRepository videoRepository,ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread) {
         super(threadExecutor, postExecutionThread);
         this.videoRepository = videoRepository;
     }

@@ -6,8 +6,11 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 
 import com.example.excadmin.tvcleanarchitecture.AndroidApplication;
+import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.component.ApplicationComponent;
+import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.modules.ActivityModule;
 import com.example.excadmin.tvcleanarchitecture.presentation.navigation.Navigator;
 
+import javax.inject.Inject;
 
 /**
  * Created by haradakazumi on 2017/07/15.
@@ -15,11 +18,13 @@ import com.example.excadmin.tvcleanarchitecture.presentation.navigation.Navigato
 
 public class BaseActivity extends Activity{
 
+    @Inject
     Navigator navigator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.getApplicationComponent().inject(this);
     }
 
     /**
@@ -33,4 +38,21 @@ public class BaseActivity extends Activity{
         fragmentTransaction.add(containerViewId, fragment);
         fragmentTransaction.commit();
     }
+
+    /**
+     * Get the Main Application component for dependency injection.
+     *
+     */
+    protected ApplicationComponent getApplicationComponent() {
+        return ((AndroidApplication) getApplication()).getApplicationComponent();
+    }
+
+    /**
+     * Get an Activity module for dependency injection.
+     *
+     */
+    protected ActivityModule getActivityModule() {
+        return new ActivityModule(this);
+    }
+
 }

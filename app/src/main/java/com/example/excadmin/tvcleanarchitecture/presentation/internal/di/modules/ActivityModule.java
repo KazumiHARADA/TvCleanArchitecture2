@@ -13,28 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.excadmin.tvcleanarchitecture;
+package com.example.excadmin.tvcleanarchitecture.presentation.internal.di.modules;
 
-import com.example.excadmin.tvcleanarchitecture.domain.executor.PostExecutionThread;
+import android.app.Activity;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
 
-import io.reactivex.Scheduler;
-import io.reactivex.android.schedulers.AndroidSchedulers;
+import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.PerActivity;
+
+import dagger.Module;
+import dagger.Provides;
 
 /**
- * MainThread (UI Thread) implementation based on a {@link Scheduler}
- * which will execute actions on the Android UI thread
+ * A module to wrap the Activity state and expose it to the graph.
  */
-@Singleton
-public class UIThread implements PostExecutionThread {
+@Module
+public class ActivityModule {
+  private final Activity activity;
 
-  @Inject
-  UIThread() {}
+  public ActivityModule(Activity activity) {
+    this.activity = activity;
+  }
 
-  @Override
-  public Scheduler getScheduler() {
-    return AndroidSchedulers.mainThread();
+  /**
+  * Expose the activity to dependents in the graph.
+  */
+  @Provides
+  @PerActivity
+  Activity activity() {
+    return this.activity;
   }
 }

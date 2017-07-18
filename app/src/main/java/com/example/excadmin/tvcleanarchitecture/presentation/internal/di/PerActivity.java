@@ -13,28 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.excadmin.tvcleanarchitecture;
+package com.example.excadmin.tvcleanarchitecture.presentation.internal.di;
 
-import com.example.excadmin.tvcleanarchitecture.domain.executor.PostExecutionThread;
+import java.lang.annotation.Retention;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
+import javax.inject.Scope;
 
-import io.reactivex.Scheduler;
-import io.reactivex.android.schedulers.AndroidSchedulers;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * MainThread (UI Thread) implementation based on a {@link Scheduler}
- * which will execute actions on the Android UI thread
+ * A scoping annotation to permit objects whose lifetime should
+ * conform to the life of the activity to be memorized in the
+ * correct component.
  */
-@Singleton
-public class UIThread implements PostExecutionThread {
-
-  @Inject
-  UIThread() {}
-
-  @Override
-  public Scheduler getScheduler() {
-    return AndroidSchedulers.mainThread();
-  }
-}
+@Scope
+@Retention(RUNTIME)
+public @interface PerActivity {}

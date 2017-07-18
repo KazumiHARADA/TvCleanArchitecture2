@@ -13,18 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.excadmin.tvcleanarchitecture.data.exception;
+package com.example.excadmin.tvcleanarchitecture.presentation.internal.di.component;
 
-/**
- * Exception throw by the application when a there is a network connection exception.
- */
-public class NetworkConnectionException extends Exception {
+import android.app.Activity;
 
-  public NetworkConnectionException() {
-    super();
-  }
+import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.PerActivity;
+import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.modules.ActivityModule;
 
-  public NetworkConnectionException(final Throwable cause) {
-    super(cause);
-  }
+import dagger.Component;
+
+@PerActivity
+@Component(dependencies = ApplicationComponent.class, modules = ActivityModule.class)
+interface ActivityComponent {
+  //Exposed to sub-graphs.
+  Activity activity();
 }
