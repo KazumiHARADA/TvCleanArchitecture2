@@ -21,21 +21,46 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 
+import com.example.excadmin.tvcleanarchitecture.AndroidApplication;
 import com.example.excadmin.tvcleanarchitecture.R;
+import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.HasComponent;
+import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.component.DaggerVideoComponent;
+import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.component.VideoComponent;
+import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.modules.ActivityModule;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.fragment.OnboardingFragment;
 
 /*
  * MainActivity class that loads MainFragment.
  */
-public class MainActivity extends LeanbackActivity {
+public class MainActivity extends LeanbackActivity implements HasComponent<VideoComponent>{
+
+    private VideoComponent videoComponent;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+
+        this.initializeInjector();
+        if (savedInstanceState == null) {
+            setContentView(R.layout.main);
+        }
+
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         if(!sharedPreferences.getBoolean(OnboardingFragment.COMPLETED_ONBOARDING, false)) {
             // This is the first time running the app, let's go to onboarding
             startActivity(new Intent(this, OnboardingActivity.class));
         }
+    }
+
+    private void initializeInjector() {
+        this.videoComponent = DaggerVideoComponent.builder()
+                .applicationComponent (((AndroidApplication) getApplication()).getApplicationComponent())
+                .activityModule(new ActivityModule(this))
+                .build();
+    }
+
+    @Override
+    public VideoComponent getComponent() {
+        return videoComponent;
     }
 }

@@ -61,11 +61,11 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.example.excadmin.tvcleanarchitecture.R;
-import com.example.excadmin.tvcleanarchitecture.data.VideoContract;
+import com.example.excadmin.tvcleanarchitecture.data.repository.datasource.VideoContract;
 import com.example.excadmin.tvcleanarchitecture.domain.model.Video;
 import com.example.excadmin.tvcleanarchitecture.domain.model.VideoCursorMapper;
-import com.example.excadmin.tvcleanarchitecture.presentation.ui.adaper.CardPresenter;
-import com.example.excadmin.tvcleanarchitecture.presentation.ui.adaper.DetailsDescriptionPresenter;
+import com.example.excadmin.tvcleanarchitecture.presentation.ui.viewpresenter.CardPresenter;
+import com.example.excadmin.tvcleanarchitecture.presentation.ui.viewpresenter.DetailsDescriptionPresenter;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.PlaybackOverlayActivity;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.VideoDetailsActivity;
 

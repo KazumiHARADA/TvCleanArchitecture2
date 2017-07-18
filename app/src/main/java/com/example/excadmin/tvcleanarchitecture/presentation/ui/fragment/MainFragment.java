@@ -16,12 +16,8 @@
 
 package com.example.excadmin.tvcleanarchitecture.presentation.ui.fragment;
 
-import android.app.LoaderManager;
 import android.content.Context;
-import android.content.CursorLoader;
 import android.content.Intent;
-import android.content.Loader;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -31,9 +27,7 @@ import android.support.v17.leanback.app.BackgroundManager;
 import android.support.v17.leanback.app.BrowseFragment;
 import android.support.v17.leanback.widget.ArrayObjectAdapter;
 import android.support.v17.leanback.widget.CursorObjectAdapter;
-import android.support.v17.leanback.widget.HeaderItem;
 import android.support.v17.leanback.widget.ImageCardView;
-import android.support.v17.leanback.widget.ListRow;
 import android.support.v17.leanback.widget.ListRowPresenter;
 import android.support.v17.leanback.widget.OnItemViewClickedListener;
 import android.support.v17.leanback.widget.OnItemViewSelectedListener;
@@ -51,29 +45,30 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.example.excadmin.tvcleanarchitecture.R;
-import com.example.excadmin.tvcleanarchitecture.presentation.service.FetchVideoService;
-import com.example.excadmin.tvcleanarchitecture.data.VideoContract;
 import com.example.excadmin.tvcleanarchitecture.domain.model.Video;
-import com.example.excadmin.tvcleanarchitecture.domain.model.VideoCursorMapper;
-import com.example.excadmin.tvcleanarchitecture.presentation.ui.adaper.CardPresenter;
-import com.example.excadmin.tvcleanarchitecture.presentation.ui.adaper.GridItemPresenter;
-import com.example.excadmin.tvcleanarchitecture.presentation.ui.adaper.IconHeaderItemPresenter;
+import com.example.excadmin.tvcleanarchitecture.presentation.presenter.VideoListPresenter;
 import com.example.excadmin.tvcleanarchitecture.presentation.service.UpdateRecommendationsService;
+import com.example.excadmin.tvcleanarchitecture.presentation.ui.VideoListView;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.GuidedStepActivity;
+import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.MainActivity;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.SearchActivity;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.SettingsActivity;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.VerticalGridActivity;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.VideoDetailsActivity;
+import com.example.excadmin.tvcleanarchitecture.presentation.ui.viewpresenter.IconHeaderItemPresenter;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.inject.Inject;
+
 /*
  * Main class to show BrowseFragment with header and rows of videos
  */
-public class MainFragment extends BrowseFragment implements LoaderManager.LoaderCallbacks<Cursor> {
+public class MainFragment extends BrowseFragment implements VideoListView{
     private static final int BACKGROUND_UPDATE_DELAY = 300;
     private final Handler mHandler = new Handler();
     private ArrayObjectAdapter mCategoryRowAdapter;
@@ -83,6 +78,9 @@ public class MainFragment extends BrowseFragment implements LoaderManager.Loader
     private Uri mBackgroundURI;
     private BackgroundManager mBackgroundManager;
     private static final int CATEGORY_LOADER = 123; // Unique ID for Category Loader.
+
+    @Inject
+    VideoListPresenter videoListPresenter;
 
     // Maps a Loader Id to its CursorObjectAdapter.
     private Map<Integer, CursorObjectAdapter> mVideoCursorAdapters;
@@ -96,7 +94,7 @@ public class MainFragment extends BrowseFragment implements LoaderManager.Loader
         mVideoCursorAdapters = new HashMap<>();
 
         // Start loading the categories from the database.
-        getLoaderManager().initLoader(CATEGORY_LOADER, null, this);
+        //getLoaderManager().initLoader(CATEGORY_LOADER, null, this);
     }
 
     @Override
@@ -117,6 +115,21 @@ public class MainFragment extends BrowseFragment implements LoaderManager.Loader
         setAdapter(mCategoryRowAdapter);
 
         updateRecommendations();
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ((MainActivity)getActivity()).getComponent().inject(this);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        this.videoListPresenter.setView(this);
+        if (savedInstanceState == null) {
+            this.videoListPresenter.initialize();
+        }
     }
 
     @Override
@@ -209,111 +222,151 @@ public class MainFragment extends BrowseFragment implements LoaderManager.Loader
         getActivity().startService(recommendationIntent);
     }
 
-    @Override
-    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        if (id == CATEGORY_LOADER) {
-            return new CursorLoader(
-                    getActivity(),   // Parent activity context
-                    VideoContract.VideoEntry.CONTENT_URI, // Table to query
-                    new String[]{"DISTINCT " + VideoContract.VideoEntry.COLUMN_CATEGORY},
-                    // Only categories
-                    null, // No selection clause
-                    null, // No selection arguments
-                    null  // Default sort order
-            );
-        } else {
-            // Assume it is for a video.
-            String category = args.getString(VideoContract.VideoEntry.COLUMN_CATEGORY);
+//    @Override
+//    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+//        if (id == CATEGORY_LOADER) {
+//            return new CursorLoader(
+//                    getActivity(),   // Parent activity context
+//                    VideoContract.VideoEntry.CONTENT_URI, // Table to query
+//                    new String[]{"DISTINCT " + VideoContract.VideoEntry.COLUMN_CATEGORY},
+//                    // Only categories
+//                    null, // No selection clause
+//                    null, // No selection arguments
+//                    null  // Default sort order
+//            );
+//        } else {
+//            // Assume it is for a video.
+//            String category = args.getString(VideoContract.VideoEntry.COLUMN_CATEGORY);
+//
+//            // This just creates a CursorLoader that gets all videos.
+//            return new CursorLoader(
+//                    getActivity(), // Parent activity context
+//                    VideoContract.VideoEntry.CONTENT_URI, // Table to query
+//                    null, // Projection to return - null means return all fields
+//                    VideoContract.VideoEntry.COLUMN_CATEGORY + " = ?", // Selection clause
+//                    new String[]{category},  // Select based on the category id.
+//                    null // Default sort order
+//            );
+//        }
+//    }
 
-            // This just creates a CursorLoader that gets all videos.
-            return new CursorLoader(
-                    getActivity(), // Parent activity context
-                    VideoContract.VideoEntry.CONTENT_URI, // Table to query
-                    null, // Projection to return - null means return all fields
-                    VideoContract.VideoEntry.COLUMN_CATEGORY + " = ?", // Selection clause
-                    new String[]{category},  // Select based on the category id.
-                    null // Default sort order
-            );
-        }
+//    @Override
+//    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+//        if (data != null && data.moveToFirst()) {
+//            final int loaderId = loader.getId();
+//
+//            if (loaderId == CATEGORY_LOADER) {
+//
+//                // Every time we have to re-get the category loader, we must re-create the sidebar.
+//                mCategoryRowAdapter.clear();
+//
+//                // Iterate through each category entry and add it to the ArrayAdapter.
+//                while (!data.isAfterLast()) {
+//
+//                    int categoryIndex =
+//                            data.getColumnIndex(VideoContract.VideoEntry.COLUMN_CATEGORY);
+//                    String category = data.getString(categoryIndex);
+//
+//                    // Create header for this category.
+//                    HeaderItem header = new HeaderItem(category);
+//
+//                    int videoLoaderId = category.hashCode(); // Create unique int from category.
+//                    CursorObjectAdapter existingAdapter = mVideoCursorAdapters.get(videoLoaderId);
+//                    if (existingAdapter == null) {
+//
+//                        // Map video results from the database to Video objects.
+//                        CursorObjectAdapter videoCursorAdapter =
+//                                new CursorObjectAdapter(new CardPresenter());
+//                        videoCursorAdapter.setMapper(new VideoCursorMapper());
+//                        mVideoCursorAdapters.put(videoLoaderId, videoCursorAdapter);
+//
+//                        ListRow row = new ListRow(header, videoCursorAdapter);
+//                        mCategoryRowAdapter.add(row);
+//
+//                        // Start loading the videos from the database for a particular category.
+//                        Bundle args = new Bundle();
+//                        args.putString(VideoContract.VideoEntry.COLUMN_CATEGORY, category);
+//                        getLoaderManager().initLoader(videoLoaderId, args, this);
+//                    } else {
+//                        ListRow row = new ListRow(header, existingAdapter);
+//                        mCategoryRowAdapter.add(row);
+//                    }
+//
+//                    data.moveToNext();
+//                }
+//
+//                // Create a row for this special case with more samples.
+//                HeaderItem gridHeader = new HeaderItem(getString(R.string.more_samples));
+//                GridItemPresenter gridPresenter = new GridItemPresenter(this);
+//                ArrayObjectAdapter gridRowAdapter = new ArrayObjectAdapter(gridPresenter);
+//                gridRowAdapter.add(getString(R.string.grid_view));
+//                gridRowAdapter.add(getString(R.string.guidedstep_first_title));
+//                gridRowAdapter.add(getString(R.string.error_fragment));
+//                gridRowAdapter.add(getString(R.string.personal_settings));
+//                ListRow row = new ListRow(gridHeader, gridRowAdapter);
+//                mCategoryRowAdapter.add(row);
+//
+//                startEntranceTransition(); // TODO: Move startEntranceTransition to after all
+//                // cursors have loaded.
+//            } else {
+//                // The CursorAdapter contains a Cursor pointing to all videos.
+//                mVideoCursorAdapters.get(loaderId).changeCursor(data);
+//            }
+//        } else {
+//            // Start an Intent to fetch the videos.
+//            Intent serviceIntent = new Intent(getActivity(), FetchVideoService.class);
+//            getActivity().startService(serviceIntent);
+//        }
+//    }
+//
+//    @Override
+//    public void onLoaderReset(Loader<Cursor> loader) {
+//        int loaderId = loader.getId();
+//        if (loaderId != CATEGORY_LOADER) {
+//            mVideoCursorAdapters.get(loaderId).changeCursor(null);
+//        } else {
+//            mCategoryRowAdapter.clear();
+//        }
+//    }
+
+    @Override
+    public void showLoading() {
+
     }
 
     @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        if (data != null && data.moveToFirst()) {
-            final int loaderId = loader.getId();
+    public void hideLoading() {
 
-            if (loaderId == CATEGORY_LOADER) {
-
-                // Every time we have to re-get the category loader, we must re-create the sidebar.
-                mCategoryRowAdapter.clear();
-
-                // Iterate through each category entry and add it to the ArrayAdapter.
-                while (!data.isAfterLast()) {
-
-                    int categoryIndex =
-                            data.getColumnIndex(VideoContract.VideoEntry.COLUMN_CATEGORY);
-                    String category = data.getString(categoryIndex);
-
-                    // Create header for this category.
-                    HeaderItem header = new HeaderItem(category);
-
-                    int videoLoaderId = category.hashCode(); // Create unique int from category.
-                    CursorObjectAdapter existingAdapter = mVideoCursorAdapters.get(videoLoaderId);
-                    if (existingAdapter == null) {
-
-                        // Map video results from the database to Video objects.
-                        CursorObjectAdapter videoCursorAdapter =
-                                new CursorObjectAdapter(new CardPresenter());
-                        videoCursorAdapter.setMapper(new VideoCursorMapper());
-                        mVideoCursorAdapters.put(videoLoaderId, videoCursorAdapter);
-
-                        ListRow row = new ListRow(header, videoCursorAdapter);
-                        mCategoryRowAdapter.add(row);
-
-                        // Start loading the videos from the database for a particular category.
-                        Bundle args = new Bundle();
-                        args.putString(VideoContract.VideoEntry.COLUMN_CATEGORY, category);
-                        getLoaderManager().initLoader(videoLoaderId, args, this);
-                    } else {
-                        ListRow row = new ListRow(header, existingAdapter);
-                        mCategoryRowAdapter.add(row);
-                    }
-
-                    data.moveToNext();
-                }
-
-                // Create a row for this special case with more samples.
-                HeaderItem gridHeader = new HeaderItem(getString(R.string.more_samples));
-                GridItemPresenter gridPresenter = new GridItemPresenter(this);
-                ArrayObjectAdapter gridRowAdapter = new ArrayObjectAdapter(gridPresenter);
-                gridRowAdapter.add(getString(R.string.grid_view));
-                gridRowAdapter.add(getString(R.string.guidedstep_first_title));
-                gridRowAdapter.add(getString(R.string.error_fragment));
-                gridRowAdapter.add(getString(R.string.personal_settings));
-                ListRow row = new ListRow(gridHeader, gridRowAdapter);
-                mCategoryRowAdapter.add(row);
-
-                startEntranceTransition(); // TODO: Move startEntranceTransition to after all
-                // cursors have loaded.
-            } else {
-                // The CursorAdapter contains a Cursor pointing to all videos.
-                mVideoCursorAdapters.get(loaderId).changeCursor(data);
-            }
-        } else {
-            // Start an Intent to fetch the videos.
-            Intent serviceIntent = new Intent(getActivity(), FetchVideoService.class);
-            getActivity().startService(serviceIntent);
-        }
     }
 
     @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-        int loaderId = loader.getId();
-        if (loaderId != CATEGORY_LOADER) {
-            mVideoCursorAdapters.get(loaderId).changeCursor(null);
-        } else {
-            mCategoryRowAdapter.clear();
-        }
+    public void showRetry() {
+
+    }
+
+    @Override
+    public void hideRetry() {
+
+    }
+
+    @Override
+    public void showError(String message) {
+
+    }
+
+    @Override
+    public Context context() {
+        return null;
+    }
+
+    @Override
+    public void renderVideoList(Collection<Video> videoModelCollection) {
+
+    }
+
+    @Override
+    public void viewVideo(Video video) {
+
     }
 
     private class UpdateBackgroundTask extends TimerTask {

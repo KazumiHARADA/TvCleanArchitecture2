@@ -13,32 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.excadmin.tvcleanarchitecture.presentation.internal.di.modules;
+package com.example.excadmin.tvcleanarchitecture.presentation.internal.di.component;
 
-import android.app.Activity;
 
 import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.PerActivity;
+import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.modules.ActivityModule;
+import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.modules.VideoModule;
+import com.example.excadmin.tvcleanarchitecture.presentation.ui.fragment.MainFragment;
 
-import dagger.Module;
-import dagger.Provides;
+import dagger.Component;
 
-/**
- * A module to wrap the Activity state and expose it to the graph.
- */
-@Module
-public class ActivityModule {
-  private final Activity activity;
-
-  public ActivityModule(Activity activity) {
-    this.activity = activity;
-  }
-
-  /**
-  * Expose the activity to dependents in the graph.
-  */
-  @Provides
-  @PerActivity
-  Activity activity() {
-    return this.activity;
-  }
+@PerActivity
+@Component(dependencies = ApplicationComponent.class, modules = {ActivityModule.class, VideoModule.class})
+public interface VideoComponent extends ActivityComponent {
+  void inject(MainFragment mainFragment);
 }

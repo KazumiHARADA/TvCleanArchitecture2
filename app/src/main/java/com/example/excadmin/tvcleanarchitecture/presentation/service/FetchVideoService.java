@@ -22,8 +22,8 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.example.excadmin.tvcleanarchitecture.R;
-import com.example.excadmin.tvcleanarchitecture.data.VideoContract;
-import com.example.excadmin.tvcleanarchitecture.data.VideoDbBuilder;
+import com.example.excadmin.tvcleanarchitecture.data.repository.datasource.VideoContract;
+import com.example.excadmin.tvcleanarchitecture.data.repository.datasource.VideoDbBuilder;
 
 import org.json.JSONException;
 

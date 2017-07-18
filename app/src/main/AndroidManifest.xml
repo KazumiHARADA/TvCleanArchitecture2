@@ -108,7 +108,7 @@
 
         <!-- Provides search suggestions for keywords against video metadata. -->
         <provider
-            android:name="com.example.excadmin.tvcleanarchitecture.data.VideoProvider"
+            android:name="com.example.excadmin.tvcleanarchitecture.data.repository.datasource.VideoProvider"
             android:authorities="${packageName}"
             android:exported="true">
             <path-permission

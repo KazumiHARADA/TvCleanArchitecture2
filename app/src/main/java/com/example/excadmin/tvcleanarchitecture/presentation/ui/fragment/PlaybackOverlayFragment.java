@@ -16,15 +16,6 @@
 
 package com.example.excadmin.tvcleanarchitecture.presentation.ui.fragment;
 
-import static android.support.v4.media.session.MediaSessionCompat.FLAG_HANDLES_MEDIA_BUTTONS;
-import static android.support.v4.media.session.MediaSessionCompat.FLAG_HANDLES_TRANSPORT_CONTROLS;
-
-import com.example.excadmin.tvcleanarchitecture.presentation.ui.helper.PlaybackControlHelper;
-import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.PlaybackOverlayActivity;
-import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.VideoDetailsActivity;
-import com.google.android.exoplayer.ExoPlayer;
-import com.google.android.exoplayer.util.Util;
-
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.LoaderManager;
@@ -72,16 +63,24 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.example.excadmin.tvcleanarchitecture.R;
-import com.example.excadmin.tvcleanarchitecture.utility.Utils;
-import com.example.excadmin.tvcleanarchitecture.data.VideoContract;
+import com.example.excadmin.tvcleanarchitecture.data.repository.datasource.VideoContract;
 import com.example.excadmin.tvcleanarchitecture.domain.model.Video;
 import com.example.excadmin.tvcleanarchitecture.domain.model.VideoCursorMapper;
+import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.PlaybackOverlayActivity;
+import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.VideoDetailsActivity;
+import com.example.excadmin.tvcleanarchitecture.presentation.ui.helper.PlaybackControlHelper;
+import com.example.excadmin.tvcleanarchitecture.presentation.ui.viewpresenter.CardPresenter;
+import com.example.excadmin.tvcleanarchitecture.utility.Utils;
 import com.example.excadmin.tvcleanarchitecture.utility.player.ExtractorRendererBuilder;
 import com.example.excadmin.tvcleanarchitecture.utility.player.VideoPlayer;
-import com.example.excadmin.tvcleanarchitecture.presentation.ui.adaper.CardPresenter;
+import com.google.android.exoplayer.ExoPlayer;
+import com.google.android.exoplayer.util.Util;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.support.v4.media.session.MediaSessionCompat.FLAG_HANDLES_MEDIA_BUTTONS;
+import static android.support.v4.media.session.MediaSessionCompat.FLAG_HANDLES_TRANSPORT_CONTROLS;
 
 /*
  * The PlaybackOverlayFragment class handles the Fragment associated with displaying the UI for the

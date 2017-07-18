@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.excadmin.tvcleanarchitecture.domain.model;
+package com.example.excadmin.tvcleanarchitecture.presentation.model;
 
 import android.media.MediaDescription;
 import android.os.Parcel;
@@ -23,7 +23,7 @@ import android.os.Parcelable;
 /**
  * Video is an immutable object that holds the various metadata associated with a single video.
  */
-public final class Video implements Parcelable {
+public final class VideoModel implements Parcelable {
     public final long id;
     public final String category;
     public final String title;
@@ -33,7 +33,7 @@ public final class Video implements Parcelable {
     public final String videoUrl;
     public final String studio;
 
-    public Video(
+    public VideoModel(
             final long id,
             final String category,
             final String title,
@@ -52,7 +52,7 @@ public final class Video implements Parcelable {
         this.studio = studio;
     }
 
-    protected Video(Parcel in) {
+    protected VideoModel(Parcel in) {
         id = in.readLong();
         category = in.readString();
         title = in.readString();
@@ -63,21 +63,21 @@ public final class Video implements Parcelable {
         studio = in.readString();
     }
 
-    public static final Creator<Video> CREATOR = new Creator<Video>() {
+    public static final Creator<VideoModel> CREATOR = new Creator<VideoModel>() {
         @Override
-        public Video createFromParcel(Parcel in) {
-            return new Video(in);
+        public VideoModel createFromParcel(Parcel in) {
+            return new VideoModel(in);
         }
 
         @Override
-        public Video[] newArray(int size) {
-            return new Video[size];
+        public VideoModel[] newArray(int size) {
+            return new VideoModel[size];
         }
     };
 
     @Override
     public boolean equals(Object m) {
-        return m instanceof Video && id == ((Video) m).id;
+        return m instanceof VideoModel && id == ((VideoModel) m).id;
     }
 
     public int describeContents() {
@@ -161,8 +161,8 @@ public final class Video implements Parcelable {
             return this;
         }
 
-        public Video buildFromMediaDesc(MediaDescription desc) {
-            return new Video(
+        public VideoModel buildFromMediaDesc(MediaDescription desc) {
+            return new VideoModel(
                     Long.parseLong(desc.getMediaId()),
                     "", // Category - not provided by MediaDescription.
                     String.valueOf(desc.getTitle()),
@@ -174,8 +174,8 @@ public final class Video implements Parcelable {
             );
         }
 
-        public Video build() {
-            return new Video(
+        public VideoModel build() {
+            return new VideoModel(
                     id,
                     category,
                     title,

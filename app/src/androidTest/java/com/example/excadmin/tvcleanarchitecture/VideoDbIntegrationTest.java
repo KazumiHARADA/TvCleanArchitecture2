@@ -8,9 +8,9 @@ import android.support.test.runner.AndroidJUnit4;
 import android.test.ActivityInstrumentationTestCase2;
 
 import com.example.excadmin.tvcleanarchitecture.presentation.service.FetchVideoService;
-import com.example.excadmin.tvcleanarchitecture.data.VideoContract;
-import com.example.excadmin.tvcleanarchitecture.data.VideoDbBuilder;
-import com.example.excadmin.tvcleanarchitecture.data.VideoDbHelper;
+import com.example.excadmin.tvcleanarchitecture.data.repository.datasource.VideoContract;
+import com.example.excadmin.tvcleanarchitecture.data.repository.datasource.VideoDbBuilder;
+import com.example.excadmin.tvcleanarchitecture.data.repository.datasource.VideoDbHelper;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.MainActivity;
 
 import org.json.JSONArray;

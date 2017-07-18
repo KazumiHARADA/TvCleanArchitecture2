@@ -19,8 +19,10 @@ import android.content.Context;
 
 import com.example.excadmin.tvcleanarchitecture.domain.executor.PostExecutionThread;
 import com.example.excadmin.tvcleanarchitecture.domain.executor.ThreadExecutor;
+import com.example.excadmin.tvcleanarchitecture.domain.repository.VideoRepository;
 import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.modules.ApplicationModule;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.BaseActivity;
+import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.MainActivity;
 
 import javax.inject.Singleton;
 
@@ -33,9 +35,11 @@ import dagger.Component;
 @Component(modules = ApplicationModule.class)
 public interface ApplicationComponent {
   void inject(BaseActivity baseActivity);
+  void inject(MainActivity mainActivity);
 
   //Exposed to sub-graphs.
   Context context();
   ThreadExecutor threadExecutor();
   PostExecutionThread postExecutionThread();
+  VideoRepository videoRepository();
 }
