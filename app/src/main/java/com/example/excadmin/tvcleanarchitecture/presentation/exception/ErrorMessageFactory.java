@@ -17,10 +17,6 @@ package com.example.excadmin.tvcleanarchitecture.presentation.exception;
 
 import android.content.Context;
 
-import com.example.excadmin.tvcleanarchitecture.R;
-import com.example.excadmin.tvcleanarchitecture.data.exception.NetworkConnectionException;
-import com.example.excadmin.tvcleanarchitecture.data.exception.UserNotFoundException;
-
 /**
  * Factory used to create error messages from an Exception as a condition.
  */
@@ -38,14 +34,14 @@ public class ErrorMessageFactory {
    * @return {@link String} an error message.
    */
   public static String create(Context context, Exception exception) {
-    String message = context.getString(R.string.exception_message_generic);
+//    String message = context.getString(R.string.exception_message_generic);
+//
+//    if (exception instanceof NetworkConnectionException) {
+//      message = context.getString(R.string.exception_message_no_connection);
+//    } else if (exception instanceof UserNotFoundException) {
+//      message = context.getString(R.string.exception_message_user_not_found);
+//    }
 
-    if (exception instanceof NetworkConnectionException) {
-      message = context.getString(R.string.exception_message_no_connection);
-    } else if (exception instanceof UserNotFoundException) {
-      message = context.getString(R.string.exception_message_user_not_found);
-    }
-
-    return message;
+    return "";//message;
   }
 }

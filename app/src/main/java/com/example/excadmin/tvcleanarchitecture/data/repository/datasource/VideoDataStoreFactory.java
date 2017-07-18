@@ -3,6 +3,9 @@ package com.example.excadmin.tvcleanarchitecture.data.repository.datasource;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import com.example.excadmin.tvcleanarchitecture.data.api.RestApiImpl;
+import com.example.excadmin.tvcleanarchitecture.data.entity.mapper.VideoEntityJsonMapper;
+
 import javax.inject.Inject;
 
 /**
@@ -22,7 +25,7 @@ public class VideoDataStoreFactory {
     public VideoDataStore create() {
         VideoDataStore userDataStore;
 
-        userDataStore = new LocalVideoDataStore(context);
+        userDataStore = new RemoteVideoDataStore(new RestApiImpl(context,new VideoEntityJsonMapper()));
 
 //        if (!this.userCache.isExpired() && this.userCache.isCached(userId)) {
 //            userDataStore = new LocalVideoDataStore(this.userCache);
