@@ -31,4 +31,6 @@ public interface VideoListView extends LoadDataView {
     void viewGuide();
 
     void viewGrid();
+
+    void viewSearch();
 }

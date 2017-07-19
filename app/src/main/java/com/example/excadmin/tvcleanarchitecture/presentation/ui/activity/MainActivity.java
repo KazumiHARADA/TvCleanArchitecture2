@@ -98,4 +98,11 @@ public class MainActivity extends LeanbackActivity implements HasComponent<Video
     public void onGridClicked() {
         navigator.navigateToGrid(this);
     }
+
+    @Override
+    public void onSearchClicked() {
+        navigator.navigateToSearch(this);
+    }
+
+
 }

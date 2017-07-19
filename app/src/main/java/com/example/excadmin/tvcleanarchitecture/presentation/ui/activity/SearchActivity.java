@@ -16,6 +16,7 @@
 
 package com.example.excadmin.tvcleanarchitecture.presentation.ui.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -27,6 +28,11 @@ import com.example.excadmin.tvcleanarchitecture.presentation.ui.fragment.SearchF
  * SearchActivity for SearchFragment
  */
 public class SearchActivity extends LeanbackActivity {
+
+    public static Intent getCallingIntent(Context context) {
+        return new Intent(context, SearchActivity.class);
+    }
+
     private SearchFragment mFragment;
 
     /**

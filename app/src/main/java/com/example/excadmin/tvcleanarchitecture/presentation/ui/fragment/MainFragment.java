@@ -51,7 +51,6 @@ import com.example.excadmin.tvcleanarchitecture.presentation.presenter.VideoList
 import com.example.excadmin.tvcleanarchitecture.presentation.service.UpdateRecommendationsService;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.VideoListView;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.MainActivity;
-import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.SearchActivity;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.viewpresenter.CardPresenter;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.viewpresenter.GridItemPresenter;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.viewpresenter.IconHeaderItemPresenter;
@@ -66,13 +65,19 @@ import javax.inject.Inject;
 /*
  * Main class to show BrowseFragment with header and rows of videos
  */
-public class MainFragment extends BrowseFragment implements VideoListView{
+public class MainFragment extends BrowseFragment implements VideoListView {
     public interface VideoListListener {
         void onVideoClicked(Video video, ImageCardView itemViewHolder);
+
         void onSettingClicked();
+
         void onGuideClicked();
+
         void onErrorClicked();
+
         void onGridClicked();
+
+        void onSearchClicked();
     }
 
     private static final int BACKGROUND_UPDATE_DELAY = 300;
@@ -135,7 +140,7 @@ public class MainFragment extends BrowseFragment implements VideoListView{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ((MainActivity)getActivity()).getComponent().inject(this);
+        ((MainActivity) getActivity()).getComponent().inject(this);
     }
 
     @Override
@@ -193,13 +198,8 @@ public class MainFragment extends BrowseFragment implements VideoListView{
     }
 
     private void setupEventListeners() {
-        setOnSearchClickedListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), SearchActivity.class);
-                startActivity(intent);
-            }
+        setOnSearchClickedListener(view -> {
+            this.videoListPresenter.onSearchClicked(view);
         });
 
         setOnItemViewClickedListener(new ItemViewClickedListener());
@@ -237,114 +237,6 @@ public class MainFragment extends BrowseFragment implements VideoListView{
         getActivity().startService(recommendationIntent);
     }
 
-//    @Override
-//    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-//        if (id == CATEGORY_LOADER) {
-//            return new CursorLoader(
-//                    getActivity(),   // Parent activity context
-//                    VideoContract.VideoEntry.CONTENT_URI, // Table to query
-//                    new String[]{"DISTINCT " + VideoContract.VideoEntry.COLUMN_CATEGORY},
-//                    // Only categories
-//                    null, // No selection clause
-//                    null, // No selection arguments
-//                    null  // Default sort order
-//            );
-//        } else {
-//            // Assume it is for a video.
-//            String category = args.getString(VideoContract.VideoEntry.COLUMN_CATEGORY);
-//
-//            // This just creates a CursorLoader that gets all videos.
-//            return new CursorLoader(
-//                    getActivity(), // Parent activity context
-//                    VideoContract.VideoEntry.CONTENT_URI, // Table to query
-//                    null, // Projection to return - null means return all fields
-//                    VideoContract.VideoEntry.COLUMN_CATEGORY + " = ?", // Selection clause
-//                    new String[]{category},  // Select based on the category id.
-//                    null // Default sort order
-//            );
-//        }
-//    }
-
-//    @Override
-//    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-//        if (data != null && data.moveToFirst()) {
-//            final int loaderId = loader.getId();
-//
-//            if (loaderId == CATEGORY_LOADER) {
-//
-//                // Every time we have to re-get the category loader, we must re-create the sidebar.
-//                mCategoryRowAdapter.clear();
-//
-//
-//                // Iterate through each category entry and add it to the ArrayAdapter.
-//                while (!data.isAfterLast()) {
-//
-//                    int categoryIndex =
-//                            data.getColumnIndex(VideoContract.VideoEntry.COLUMN_CATEGORY);
-//                    String category = data.getString(categoryIndex);
-//
-//                    // Create header for this category.
-//                    HeaderItem header = new HeaderItem(category);
-//
-//                    int videoLoaderId = category.hashCode(); // Create unique int from category.
-//                    CursorObjectAdapter existingAdapter = mVideoArrayAdapters.get(videoLoaderId);
-//                    if (existingAdapter == null) {
-//
-//                        // Map video results from the database to Video objects.
-//                        CursorObjectAdapter videoCursorAdapter =
-//                                new CursorObjectAdapter(new CardPresenter());
-//                        videoCursorAdapter.setMapper(new VideoCursorMapper());
-//                        mVideoArrayAdapters.put(videoLoaderId, videoCursorAdapter);
-//
-//                        ListRow row = new ListRow(header, videoCursorAdapter);
-//                        mCategoryRowAdapter.add(row);
-//
-//                        // Start loading the videos from the database for a particular category.
-//                        Bundle args = new Bundle();
-//                        args.putString(VideoContract.VideoEntry.COLUMN_CATEGORY, category);
-//                        getLoaderManager().initLoader(videoLoaderId, args, this);
-//                    } else {
-//                        ListRow row = new ListRow(header, existingAdapter);
-//                        mCategoryRowAdapter.add(row);
-//                    }
-//
-//                    data.moveToNext();
-//                }
-//
-//                // Create a row for this special case with more samples.
-//                HeaderItem gridHeader = new HeaderItem(getString(R.string.more_samples));
-//                GridItemPresenter gridPresenter = new GridItemPresenter(this);
-//                ArrayObjectAdapter gridRowAdapter = new ArrayObjectAdapter(gridPresenter);
-//                gridRowAdapter.add(getString(R.string.grid_view));
-//                gridRowAdapter.add(getString(R.string.guidedstep_first_title));
-//                gridRowAdapter.add(getString(R.string.error_fragment));
-//                gridRowAdapter.add(getString(R.string.personal_settings));
-//                ListRow row = new ListRow(gridHeader, gridRowAdapter);
-//                mCategoryRowAdapter.add(row);
-//
-//                startEntranceTransition(); // TODO: Move startEntranceTransition to after all
-//                // cursors have loaded.
-//            } else {
-//                // The CursorAdapter contains a Cursor pointing to all videos.
-//                mVideoArrayAdapters.get(loaderId).changeCursor(data);
-//            }
-//        } else {
-//            // Start an Intent to fetch the videos.
-//            Intent serviceIntent = new Intent(getActivity(), FetchVideoService.class);
-//            getActivity().startService(serviceIntent);
-//        }
-//    }
-//
-//    @Override
-//    public void onLoaderReset(Loader<Cursor> loader) {
-//        int loaderId = loader.getId();
-//        if (loaderId != CATEGORY_LOADER) {
-//            mVideoArrayAdapters.get(loaderId).changeCursor(null);
-//        } else {
-//            mCategoryRowAdapter.clear();
-//        }
-//    }
-
     @Override
     public void showLoading() {
 
@@ -374,7 +266,7 @@ public class MainFragment extends BrowseFragment implements VideoListView{
     public void renderVideoList(CategoryList videoModelCollection) {
         mCategoryRowAdapter.clear();
 
-        for (CategoryVideoList categoryVideoList :videoModelCollection.getGooglevideos()) {
+        for (CategoryVideoList categoryVideoList : videoModelCollection.getGooglevideos()) {
 
             String category = categoryVideoList.getCategory();
             HeaderItem header = new HeaderItem(category);
@@ -385,7 +277,7 @@ public class MainFragment extends BrowseFragment implements VideoListView{
 
             if (existingAdapter == null) {
                 ArrayObjectAdapter adapter = new ArrayObjectAdapter(new CardPresenter());
-                adapter.addAll(0,categoryVideoList.getVideos());
+                adapter.addAll(0, categoryVideoList.getVideos());
 
                 mVideoArrayAdapters.put(videoLoaderId, adapter);
 
@@ -412,8 +304,8 @@ public class MainFragment extends BrowseFragment implements VideoListView{
     }
 
     @Override
-    public void viewVideo(Video video,ImageCardView imageCardView) {
-        videoListListener.onVideoClicked(video,imageCardView);
+    public void viewVideo(Video video, ImageCardView imageCardView) {
+        videoListListener.onVideoClicked(video, imageCardView);
     }
 
     @Override
@@ -434,6 +326,11 @@ public class MainFragment extends BrowseFragment implements VideoListView{
     @Override
     public void viewGrid() {
         videoListListener.onGridClicked();
+    }
+
+    @Override
+    public void viewSearch() {
+        videoListListener.onSearchClicked();
     }
 
     @Override
@@ -459,16 +356,16 @@ public class MainFragment extends BrowseFragment implements VideoListView{
     private final class ItemViewClickedListener implements OnItemViewClickedListener {
         @Override
         public void onItemClicked(Presenter.ViewHolder itemViewHolder, Object item,
-                RowPresenter.ViewHolder rowViewHolder, Row row) {
+                                  RowPresenter.ViewHolder rowViewHolder, Row row) {
 
-            videoListPresenter.onVideoClicked(itemViewHolder,item,rowViewHolder,row);
+            videoListPresenter.onVideoClicked(itemViewHolder, item, rowViewHolder, row);
         }
     }
 
     private final class ItemViewSelectedListener implements OnItemViewSelectedListener {
         @Override
         public void onItemSelected(Presenter.ViewHolder itemViewHolder, Object item,
-                RowPresenter.ViewHolder rowViewHolder, Row row) {
+                                   RowPresenter.ViewHolder rowViewHolder, Row row) {
             if (item instanceof Video) {
                 mBackgroundURI = Uri.parse(((Video) item).bgImageUrl);
                 startBackgroundTimer();

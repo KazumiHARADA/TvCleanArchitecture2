@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.v17.leanback.widget.ImageCardView;
 import android.support.v17.leanback.widget.Row;
 import android.support.v17.leanback.widget.RowPresenter;
+import android.view.View;
 
 import com.example.excadmin.tvcleanarchitecture.R;
 import com.example.excadmin.tvcleanarchitecture.domain.exception.DefaultErrorBundle;
@@ -113,6 +114,10 @@ public class VideoListPresenter extends Presenter {
                 this.mVideoListView.viewError();
             }
         }
+    }
+
+    public void onSearchClicked(View view) {
+        this.mVideoListView.viewSearch();
     }
 
 

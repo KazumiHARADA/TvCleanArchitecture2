@@ -16,6 +16,7 @@
 package com.example.excadmin.tvcleanarchitecture.presentation.navigation;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v17.leanback.widget.ImageCardView;
@@ -24,6 +25,7 @@ import android.support.v4.app.ActivityOptionsCompat;
 import com.example.excadmin.tvcleanarchitecture.R;
 import com.example.excadmin.tvcleanarchitecture.domain.model.Video;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.GuidedStepActivity;
+import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.SearchActivity;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.SettingsActivity;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.VerticalGridActivity;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.VideoDetailsActivity;
@@ -90,6 +92,11 @@ public class Navigator {
                 ActivityOptionsCompat.makeSceneTransitionAnimation(activity)
                         .toBundle();
         activity.startActivity(intentToLaunch, bundle);
+    }
+
+    public void navigateToSearch(Context context) {
+        Intent intentToLaunch = SearchActivity.getCallingIntent(context);
+        context.startActivity(intentToLaunch);
     }
 
 }
