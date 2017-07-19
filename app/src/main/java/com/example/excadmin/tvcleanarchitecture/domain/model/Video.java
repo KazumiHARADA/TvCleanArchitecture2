@@ -20,6 +20,8 @@ import android.media.MediaDescription;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.List;
+
 /**
  * Video is an immutable object that holds the various metadata associated with a single video.
  */
@@ -51,6 +53,27 @@ public final class Video implements Parcelable {
         this.cardImageUrl = cardImageUrl;
         this.studio = studio;
     }
+
+    public Video(
+            final long id,
+            final String category,
+            final String title,
+            final String desc,
+            final List<String> videoUrls,
+            final String bgImageUrl,
+            final String cardImageUrl,
+            final String studio) {
+        this.id = id;
+        this.category = category;
+        this.title = title;
+        this.description = desc;
+        this.videoUrl = videoUrls.get(0);
+        this.bgImageUrl = bgImageUrl;
+        this.cardImageUrl = cardImageUrl;
+        this.studio = studio;
+    }
+
+
 
     protected Video(Parcel in) {
         id = in.readLong();

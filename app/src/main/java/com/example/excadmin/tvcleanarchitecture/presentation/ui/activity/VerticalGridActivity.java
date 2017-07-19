@@ -16,6 +16,8 @@
 
 package com.example.excadmin.tvcleanarchitecture.presentation.ui.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.excadmin.tvcleanarchitecture.R;
@@ -24,6 +26,11 @@ import com.example.excadmin.tvcleanarchitecture.R;
  * VerticalGridActivity that loads VerticalGridFragment
  */
 public class VerticalGridActivity extends LeanbackActivity {
+
+    public static Intent getCallingIntent(Context context) {
+        return new Intent(context, VerticalGridActivity.class);
+    }
+
     /**
      * Called when the activity is first created.
      */

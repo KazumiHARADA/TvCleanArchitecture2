@@ -19,6 +19,7 @@ package com.example.excadmin.tvcleanarchitecture.presentation.ui.activity;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -35,6 +36,10 @@ import java.util.List;
  * Activity that showcases different aspects of GuidedStepFragments.
  */
 public class GuidedStepActivity extends Activity {
+
+    public static Intent getCallingIntent(Context context) {
+        return new Intent(context, GuidedStepActivity.class);
+    }
 
     private static final int CONTINUE = 0;
     private static final int BACK = 1;

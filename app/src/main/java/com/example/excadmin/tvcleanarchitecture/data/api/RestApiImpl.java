@@ -4,12 +4,11 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import com.example.excadmin.tvcleanarchitecture.data.entity.VideoEntity;
+import com.example.excadmin.tvcleanarchitecture.data.entity.CategoryListEntity;
 import com.example.excadmin.tvcleanarchitecture.data.entity.mapper.VideoEntityJsonMapper;
 import com.example.excadmin.tvcleanarchitecture.data.exception.NetworkConnectionException;
 
 import java.net.MalformedURLException;
-import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -32,8 +31,8 @@ public class RestApiImpl implements RestApi {
     }
 
     @Override
-    public Observable<List<VideoEntity>> videoEntityList() {
-        Single<List<VideoEntity>> single = Single.create(singleSubscribeOn -> {
+    public Observable<CategoryListEntity> videoEntityList() {
+        Single<CategoryListEntity> single = Single.create(singleSubscribeOn -> {
             if (isThereInternetConnection()) {
                 String responseVideoList = getUserEntitiesFromApi();
                 if (responseVideoList != null) {

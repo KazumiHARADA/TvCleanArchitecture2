@@ -16,6 +16,8 @@
 
 package com.example.excadmin.tvcleanarchitecture.presentation.ui.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.excadmin.tvcleanarchitecture.R;
@@ -24,6 +26,11 @@ import com.example.excadmin.tvcleanarchitecture.R;
  * Details activity class that loads VideoDetailsFragment class
  */
 public class VideoDetailsActivity extends LeanbackActivity {
+
+    public static Intent getCallingIntent(Context context) {
+        return new Intent(context, VideoDetailsActivity.class);
+    }
+
     public static final String SHARED_ELEMENT_NAME = "hero";
     public static final String VIDEO = "Video";
     public static final String NOTIFICATION_ID = "NotificationId";

@@ -2,6 +2,8 @@ package com.example.excadmin.tvcleanarchitecture.data.entity;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 /**
  * Created by excadmin on 2017/07/18.
  */
@@ -19,14 +21,14 @@ public class VideoEntity {
     @SerializedName("description")
     public String description;
 
-    @SerializedName("bgImageUrl")
+    @SerializedName("background")
     public String bgImageUrl;
 
-    @SerializedName("cardImageUrl")
+    @SerializedName("card")
     public String cardImageUrl;
 
-    @SerializedName("videoUrl")
-    public String videoUrl;
+    @SerializedName("sources")
+    public List<String> videoUrl;
 
     @SerializedName("studio")
     public String studio;
@@ -55,7 +57,7 @@ public class VideoEntity {
         return cardImageUrl;
     }
 
-    public String getVideoUrl() {
+    public List<String> getVideoUrl() {
         return videoUrl;
     }
 

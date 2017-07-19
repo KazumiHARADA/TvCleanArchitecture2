@@ -20,25 +20,34 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v17.leanback.widget.ImageCardView;
 
 import com.example.excadmin.tvcleanarchitecture.AndroidApplication;
 import com.example.excadmin.tvcleanarchitecture.R;
+import com.example.excadmin.tvcleanarchitecture.domain.model.Video;
 import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.HasComponent;
 import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.component.DaggerVideoComponent;
 import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.component.VideoComponent;
 import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.modules.ActivityModule;
+import com.example.excadmin.tvcleanarchitecture.presentation.navigation.Navigator;
+import com.example.excadmin.tvcleanarchitecture.presentation.ui.fragment.MainFragment;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.fragment.OnboardingFragment;
 
 /*
  * MainActivity class that loads MainFragment.
  */
-public class MainActivity extends LeanbackActivity implements HasComponent<VideoComponent>{
+public class MainActivity extends LeanbackActivity implements HasComponent<VideoComponent>,MainFragment.VideoListListener{
 
     private VideoComponent videoComponent;
+
+    Navigator navigator;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //FIXME use dagger2
+        navigator = new Navigator();
 
         this.initializeInjector();
         if (savedInstanceState == null) {
@@ -62,5 +71,31 @@ public class MainActivity extends LeanbackActivity implements HasComponent<Video
     @Override
     public VideoComponent getComponent() {
         return videoComponent;
+    }
+
+
+    @Override
+    public void onVideoClicked(Video video, ImageCardView imageCardView) {
+        navigator.navigateToVideoDetail(this,video,imageCardView);
+    }
+
+    @Override
+    public void onSettingClicked() {
+        navigator.navigateToSetting(this);
+    }
+
+    @Override
+    public void onGuideClicked() {
+        navigator.navigateToGuide(this);
+    }
+
+    @Override
+    public void onErrorClicked() {
+        navigator.navigateToError(this);
+    }
+
+    @Override
+    public void onGridClicked() {
+        navigator.navigateToGrid(this);
     }
 }

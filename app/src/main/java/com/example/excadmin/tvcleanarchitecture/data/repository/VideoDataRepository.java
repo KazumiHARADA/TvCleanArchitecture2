@@ -3,10 +3,9 @@ package com.example.excadmin.tvcleanarchitecture.data.repository;
 import com.example.excadmin.tvcleanarchitecture.data.entity.mapper.VideoEntityDataMapper;
 import com.example.excadmin.tvcleanarchitecture.data.repository.datasource.VideoDataStore;
 import com.example.excadmin.tvcleanarchitecture.data.repository.datasource.VideoDataStoreFactory;
+import com.example.excadmin.tvcleanarchitecture.domain.model.CategoryList;
 import com.example.excadmin.tvcleanarchitecture.domain.model.Video;
 import com.example.excadmin.tvcleanarchitecture.domain.repository.VideoRepository;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -29,7 +28,7 @@ public class VideoDataRepository implements VideoRepository {
     }
 
     @Override
-    public Observable<List<Video>> videos() {
+    public Observable<CategoryList> videos() {
         final VideoDataStore videoDataStore = this.dataStoreFactory.create();
         return videoDataStore.videoEntityList().map(this.videoEntityDataMapper::transform);
     }

@@ -17,11 +17,17 @@
 package com.example.excadmin.tvcleanarchitecture.presentation.ui.activity;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.excadmin.tvcleanarchitecture.R;
 
 public class SettingsActivity extends Activity {
+    public static Intent getCallingIntent(Context context) {
+        return new Intent(context, SettingsActivity.class);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

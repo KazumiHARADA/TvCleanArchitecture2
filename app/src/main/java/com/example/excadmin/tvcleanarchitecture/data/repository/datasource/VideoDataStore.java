@@ -15,9 +15,8 @@
  */
 package com.example.excadmin.tvcleanarchitecture.data.repository.datasource;
 
+import com.example.excadmin.tvcleanarchitecture.data.entity.CategoryListEntity;
 import com.example.excadmin.tvcleanarchitecture.data.entity.VideoEntity;
-
-import java.util.List;
 
 import io.reactivex.Observable;
 
@@ -28,7 +27,7 @@ public interface VideoDataStore {
   /**
    * Get an {@link Observable} which will emit a List of {@link VideoEntity}.
    */
-  Observable<List<VideoEntity>> videoEntityList();
+  Observable<CategoryListEntity> videoEntityList();
 
   /**
    * Get an {@link Observable} which will emit a {@link VideoEntity} by its id.

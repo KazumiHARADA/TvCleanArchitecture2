@@ -19,10 +19,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
 
+import com.example.excadmin.tvcleanarchitecture.data.entity.CategoryListEntity;
 import com.example.excadmin.tvcleanarchitecture.data.entity.VideoEntity;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -43,8 +41,8 @@ class LocalVideoDataStore implements VideoDataStore {
 
     //private final UserCache userCache;
     @Override
-    public Observable<List<VideoEntity>> videoEntityList() {
-        Single<List<VideoEntity>> videoListSingle = Single.create(singleOnSubscribe -> {
+    public Observable<CategoryListEntity> videoEntityList() {
+        Single<CategoryListEntity> videoListSingle = Single.create(singleOnSubscribe -> {
 
             VideoDbHelper openHelper = new VideoDbHelper(context);
             Cursor cursor = openHelper.getReadableDatabase().query(
@@ -64,7 +62,7 @@ class LocalVideoDataStore implements VideoDataStore {
                     String category = cursor.getString(categoryIndex);
 
                     Log.d("test",category);
-                    singleOnSubscribe.onSuccess(new ArrayList<>());
+                    singleOnSubscribe.onSuccess(new CategoryListEntity());
                 }
             } catch (NullPointerException e) {
                 singleOnSubscribe.onError(e);

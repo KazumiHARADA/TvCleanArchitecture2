@@ -1,5 +1,6 @@
 package com.example.excadmin.tvcleanarchitecture.data.api;
 
+import com.example.excadmin.tvcleanarchitecture.data.entity.CategoryListEntity;
 import com.example.excadmin.tvcleanarchitecture.data.entity.VideoEntity;
 
 import java.util.List;
@@ -20,5 +21,5 @@ public interface RestApi {
     String API_URL_GET_VIDEO_LIST = API_BASE_URL + "android_tv_videos_new.json";
 
 
-    Observable<List<VideoEntity>> videoEntityList();
+    Observable<CategoryListEntity> videoEntityList();
 }

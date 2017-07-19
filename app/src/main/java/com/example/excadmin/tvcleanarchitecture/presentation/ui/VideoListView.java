@@ -1,6 +1,8 @@
 package com.example.excadmin.tvcleanarchitecture.presentation.ui;
 
-import java.util.Collection;
+import android.support.v17.leanback.widget.ImageCardView;
+
+import com.example.excadmin.tvcleanarchitecture.domain.model.CategoryList;
 import com.example.excadmin.tvcleanarchitecture.domain.model.Video;
 
 /**
@@ -13,12 +15,20 @@ public interface VideoListView extends LoadDataView {
      *
      * @param videoModelCollection The collection of {@link Video} that will be shown.
      */
-    void renderVideoList(Collection<Video> videoModelCollection);
+    void renderVideoList(CategoryList videoModelCollection);
 
     /**
      * View a {@link Video} profile/details.
      *
      * @param video The user that will be shown.
      */
-    void viewVideo(Video video);
+    void viewVideo(Video video, ImageCardView imageCardView);
+
+    void viewError();
+
+    void viewSetting();
+
+    void viewGuide();
+
+    void viewGrid();
 }
