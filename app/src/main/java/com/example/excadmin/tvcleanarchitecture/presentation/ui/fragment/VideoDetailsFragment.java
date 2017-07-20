@@ -101,7 +101,7 @@ public class VideoDetailsFragment extends DetailsFragment implements VideoPresen
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        if (getActivity() instanceof MainFragment.VideoListListener) {
+        if (getActivity() instanceof VideoDetailsListener) {
             this.videoListener = (VideoDetailsListener) getActivity();
         }
     }
