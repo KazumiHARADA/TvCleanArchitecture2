@@ -22,4 +22,6 @@ public interface RestApi {
 
 
     Observable<CategoryListEntity> videoEntityList();
+
+    Observable<List<VideoEntity>> latestVideoEntityList(String category);
 }

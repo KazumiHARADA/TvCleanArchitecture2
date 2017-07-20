@@ -49,7 +49,6 @@ import com.example.excadmin.tvcleanarchitecture.domain.model.CategoryVideoList;
 import com.example.excadmin.tvcleanarchitecture.domain.model.Video;
 import com.example.excadmin.tvcleanarchitecture.presentation.presenter.VideoListPresenter;
 import com.example.excadmin.tvcleanarchitecture.presentation.service.UpdateRecommendationsService;
-import com.example.excadmin.tvcleanarchitecture.presentation.ui.VideoListView;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.MainActivity;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.viewpresenter.CardPresenter;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.viewpresenter.GridItemPresenter;
@@ -65,7 +64,7 @@ import javax.inject.Inject;
 /*
  * Main class to show BrowseFragment with header and rows of videos
  */
-public class MainFragment extends BrowseFragment implements VideoListView {
+public class MainFragment extends BrowseFragment implements VideoListPresenter.VideoListView {
     public interface VideoListListener {
         void onVideoClicked(Video video, ImageCardView itemViewHolder);
 
@@ -88,7 +87,6 @@ public class MainFragment extends BrowseFragment implements VideoListView {
     private Timer mBackgroundTimer;
     private Uri mBackgroundURI;
     private BackgroundManager mBackgroundManager;
-    private static final int CATEGORY_LOADER = 123; // Unique ID for Category Loader.
 
     @Inject
     VideoListPresenter videoListPresenter;

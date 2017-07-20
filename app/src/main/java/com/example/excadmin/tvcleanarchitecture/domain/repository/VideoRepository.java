@@ -3,6 +3,8 @@ package com.example.excadmin.tvcleanarchitecture.domain.repository;
 import com.example.excadmin.tvcleanarchitecture.domain.model.CategoryList;
 import com.example.excadmin.tvcleanarchitecture.domain.model.Video;
 
+import java.util.List;
+
 import io.reactivex.Observable;
 
 /**
@@ -12,6 +14,8 @@ import io.reactivex.Observable;
 public interface VideoRepository {
 
     Observable<CategoryList> videos();
+
+    Observable<List<Video>> latestVideos(final String category);
 
     Observable<Video> video(final int contentId);
 }

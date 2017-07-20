@@ -5,10 +5,13 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 import com.example.excadmin.tvcleanarchitecture.data.entity.CategoryListEntity;
+import com.example.excadmin.tvcleanarchitecture.data.entity.CategoryVideoListEntity;
+import com.example.excadmin.tvcleanarchitecture.data.entity.VideoEntity;
 import com.example.excadmin.tvcleanarchitecture.data.entity.mapper.VideoEntityJsonMapper;
 import com.example.excadmin.tvcleanarchitecture.data.exception.NetworkConnectionException;
 
 import java.net.MalformedURLException;
+import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -37,6 +40,33 @@ public class RestApiImpl implements RestApi {
                 String responseVideoList = getUserEntitiesFromApi();
                 if (responseVideoList != null) {
                     singleSubscribeOn.onSuccess(videoEntityJsonMapper.transformVideoEntityCollection(responseVideoList));
+                } else {
+                    singleSubscribeOn.onError(new NetworkConnectionException());
+                }
+            } else {
+                singleSubscribeOn.onError(new NetworkConnectionException());
+            }
+        });
+        return single.toObservable();
+    }
+
+    @Override
+    public Observable<List<VideoEntity>> latestVideoEntityList(String category) {
+        Single<List<VideoEntity>> single = Single.create(singleSubscribeOn -> {
+            if (isThereInternetConnection()) {
+                String responseVideoList = getUserEntitiesFromApi();
+                if (responseVideoList != null) {
+
+                    CategoryListEntity categoryList = videoEntityJsonMapper.transformVideoEntityCollection(responseVideoList);
+
+                    for (CategoryVideoListEntity categoryVideoListEntity : categoryList.getGooglevideos()) {
+                        if (categoryVideoListEntity.getCategory().contains(category)) {
+                            singleSubscribeOn.onSuccess(categoryVideoListEntity.getVideos());
+                            return;
+                        }
+                    }
+                    singleSubscribeOn.onError(new NetworkConnectionException());
+
                 } else {
                     singleSubscribeOn.onError(new NetworkConnectionException());
                 }

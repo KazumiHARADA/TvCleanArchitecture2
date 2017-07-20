@@ -7,6 +7,8 @@ import com.example.excadmin.tvcleanarchitecture.domain.model.CategoryList;
 import com.example.excadmin.tvcleanarchitecture.domain.model.Video;
 import com.example.excadmin.tvcleanarchitecture.domain.repository.VideoRepository;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
@@ -31,6 +33,12 @@ public class VideoDataRepository implements VideoRepository {
     public Observable<CategoryList> videos() {
         final VideoDataStore videoDataStore = this.dataStoreFactory.create();
         return videoDataStore.videoEntityList().map(this.videoEntityDataMapper::transform);
+    }
+
+    @Override
+    public Observable<List<Video>> latestVideos(String category) {
+        final VideoDataStore videoDataStore = this.dataStoreFactory.create();
+        return videoDataStore.latestVideoEntityList(category).map(this.videoEntityDataMapper::transform);
     }
 
     @Override

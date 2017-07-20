@@ -20,16 +20,23 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.excadmin.tvcleanarchitecture.AndroidApplication;
 import com.example.excadmin.tvcleanarchitecture.R;
+import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.HasComponent;
+import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.component.DaggerVideoComponent;
+import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.component.VideoComponent;
+import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.modules.ActivityModule;
 
 /*
  * Details activity class that loads VideoDetailsFragment class
  */
-public class VideoDetailsActivity extends LeanbackActivity {
+public class VideoDetailsActivity extends LeanbackActivity implements HasComponent<VideoComponent> {
 
     public static Intent getCallingIntent(Context context) {
         return new Intent(context, VideoDetailsActivity.class);
     }
+
+    private VideoComponent videoComponent;
 
     public static final String SHARED_ELEMENT_NAME = "hero";
     public static final String VIDEO = "Video";
@@ -41,6 +48,21 @@ public class VideoDetailsActivity extends LeanbackActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        this.initializeInjector();
+
         setContentView(R.layout.fragment_details);
+    }
+
+    private void initializeInjector() {
+        this.videoComponent = DaggerVideoComponent.builder()
+                .applicationComponent (((AndroidApplication) getApplication()).getApplicationComponent())
+                .activityModule(new ActivityModule(this))
+                .build();
+    }
+
+    @Override
+    public VideoComponent getComponent() {
+        return videoComponent;
     }
 }

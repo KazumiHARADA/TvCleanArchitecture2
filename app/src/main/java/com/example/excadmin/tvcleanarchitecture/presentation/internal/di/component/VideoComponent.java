@@ -20,6 +20,7 @@ import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.PerActi
 import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.modules.ActivityModule;
 import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.modules.VideoModule;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.fragment.MainFragment;
+import com.example.excadmin.tvcleanarchitecture.presentation.ui.fragment.VideoDetailsFragment;
 
 import dagger.Component;
 
@@ -27,4 +28,5 @@ import dagger.Component;
 @Component(dependencies = ApplicationComponent.class, modules = {ActivityModule.class, VideoModule.class})
 public interface VideoComponent extends ActivityComponent {
   void inject(MainFragment mainFragment);
+  void inject(VideoDetailsFragment videoDetailsFragment);
 }

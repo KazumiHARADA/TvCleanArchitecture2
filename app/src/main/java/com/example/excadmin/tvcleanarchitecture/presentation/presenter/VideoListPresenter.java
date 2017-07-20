@@ -15,7 +15,7 @@ import com.example.excadmin.tvcleanarchitecture.domain.model.CategoryList;
 import com.example.excadmin.tvcleanarchitecture.domain.model.Video;
 import com.example.excadmin.tvcleanarchitecture.presentation.exception.ErrorMessageFactory;
 import com.example.excadmin.tvcleanarchitecture.presentation.mapper.VideoModelDataMapper;
-import com.example.excadmin.tvcleanarchitecture.presentation.ui.VideoListView;
+import com.example.excadmin.tvcleanarchitecture.presentation.ui.LoadDataView;
 
 import javax.inject.Inject;
 
@@ -64,7 +64,7 @@ public class VideoListPresenter extends Presenter {
     private void loadUserList() {
         this.hideViewRetry();
         this.showViewLoading();
-        this.getUserList();
+        this.getVideoList();
     }
 
     private void showViewLoading() {
@@ -94,12 +94,12 @@ public class VideoListPresenter extends Presenter {
     }
 
     public void onVideoClicked(android.support.v17.leanback.widget.Presenter.ViewHolder itemViewHolder, Object item,
-                                RowPresenter.ViewHolder rowViewHolder, Row row) {
+                               RowPresenter.ViewHolder rowViewHolder, Row row) {
         if (item instanceof Video) {
             Video video = (Video) item;
             ImageCardView imageCardView = ((ImageCardView) itemViewHolder.view);
 
-            this.mVideoListView.viewVideo(video,imageCardView);
+            this.mVideoListView.viewVideo(video, imageCardView);
 
         } else if (item instanceof String) {
             if (((String) item).contains(this.mVideoListView.context().getString(R.string.grid_view))) {
@@ -108,7 +108,7 @@ public class VideoListPresenter extends Presenter {
                 this.mVideoListView.viewGuide();
             } else if (((String) item).contains(this.mVideoListView.context().getString(R.string.error_fragment))) {
                 this.mVideoListView.viewError();
-            } else if(((String) item).contains(this.mVideoListView.context().getString(R.string.personal_settings))) {
+            } else if (((String) item).contains(this.mVideoListView.context().getString(R.string.personal_settings))) {
                 this.mVideoListView.viewSetting();
             } else {
                 this.mVideoListView.viewError();
@@ -121,25 +121,55 @@ public class VideoListPresenter extends Presenter {
     }
 
 
-    private void getUserList() {
+    private void getVideoList() {
         this.getVideoListUseCase.execute(new VideoListObserver(), null);
     }
 
     private final class VideoListObserver extends DefaultObserver<CategoryList> {
 
-        @Override public void onComplete() {
+        @Override
+        public void onComplete() {
             VideoListPresenter.this.hideViewLoading();
         }
 
-        @Override public void onError(Throwable e) {
+        @Override
+        public void onError(Throwable e) {
             VideoListPresenter.this.hideViewLoading();
             VideoListPresenter.this.showErrorMessage(new DefaultErrorBundle((Exception) e));
             VideoListPresenter.this.showViewRetry();
         }
 
-        @Override public void onNext(CategoryList categoryList) {
+        @Override
+        public void onNext(CategoryList categoryList) {
             VideoListPresenter.this.hideViewLoading();
             VideoListPresenter.this.renderVideoList(categoryList);
         }
+    }
+
+    public interface VideoListView extends LoadDataView {
+        /**
+         * Render a user list in the UI.
+         *
+         * @param videoModelCollection The collection of {@link Video} that will be shown.
+         */
+        void renderVideoList(CategoryList videoModelCollection);
+
+        /**
+         * View a {@link Video} profile/details.
+         *
+         * @param video The user that will be shown.
+         */
+        void viewVideo(Video video, ImageCardView imageCardView);
+
+        void viewError();
+
+        void viewSetting();
+
+        void viewGuide();
+
+        void viewGrid();
+
+        void viewSearch();
+
     }
 }
