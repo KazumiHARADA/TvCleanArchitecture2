@@ -19,22 +19,28 @@ package com.example.excadmin.tvcleanarchitecture.presentation.ui.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v17.leanback.widget.ImageCardView;
 
 import com.example.excadmin.tvcleanarchitecture.AndroidApplication;
 import com.example.excadmin.tvcleanarchitecture.R;
+import com.example.excadmin.tvcleanarchitecture.domain.model.Video;
 import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.HasComponent;
 import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.component.DaggerVideoComponent;
 import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.component.VideoComponent;
 import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.modules.ActivityModule;
+import com.example.excadmin.tvcleanarchitecture.presentation.navigation.Navigator;
+import com.example.excadmin.tvcleanarchitecture.presentation.ui.fragment.VideoDetailsFragment;
 
 /*
  * Details activity class that loads VideoDetailsFragment class
  */
-public class VideoDetailsActivity extends LeanbackActivity implements HasComponent<VideoComponent> {
+public class VideoDetailsActivity extends LeanbackActivity implements HasComponent<VideoComponent>,VideoDetailsFragment.VideoDetailsListener {
 
     public static Intent getCallingIntent(Context context) {
         return new Intent(context, VideoDetailsActivity.class);
     }
+
+    Navigator navigator;
 
     private VideoComponent videoComponent;
 
@@ -48,6 +54,9 @@ public class VideoDetailsActivity extends LeanbackActivity implements HasCompone
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //FIXME use dagger2
+        navigator = new Navigator();
 
         this.initializeInjector();
 
@@ -64,5 +73,10 @@ public class VideoDetailsActivity extends LeanbackActivity implements HasCompone
     @Override
     public VideoComponent getComponent() {
         return videoComponent;
+    }
+
+    @Override
+    public void onVideoClicked(Video video, ImageCardView itemViewHolder) {
+        navigator.navigateToVideoDetail(this,video,itemViewHolder);
     }
 }

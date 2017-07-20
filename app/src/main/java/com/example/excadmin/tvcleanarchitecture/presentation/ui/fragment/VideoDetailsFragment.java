@@ -19,7 +19,6 @@ package com.example.excadmin.tvcleanarchitecture.presentation.ui.fragment;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -30,7 +29,6 @@ import android.support.v17.leanback.widget.Action;
 import android.support.v17.leanback.widget.ArrayObjectAdapter;
 import android.support.v17.leanback.widget.ClassPresenterSelector;
 import android.support.v17.leanback.widget.CursorObjectAdapter;
-import android.support.v17.leanback.widget.DetailsOverviewLogoPresenter;
 import android.support.v17.leanback.widget.DetailsOverviewRow;
 import android.support.v17.leanback.widget.FullWidthDetailsOverviewRowPresenter;
 import android.support.v17.leanback.widget.FullWidthDetailsOverviewSharedElementHelper;
@@ -44,13 +42,9 @@ import android.support.v17.leanback.widget.Presenter;
 import android.support.v17.leanback.widget.Row;
 import android.support.v17.leanback.widget.RowPresenter;
 import android.support.v17.leanback.widget.SparseArrayObjectAdapter;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -65,6 +59,7 @@ import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.Playbac
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.VideoDetailsActivity;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.viewpresenter.CardPresenter;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.viewpresenter.DetailsDescriptionPresenter;
+import com.example.excadmin.tvcleanarchitecture.presentation.ui.viewpresenter.MovieDetailsOverviewLogoPresenter;
 
 import java.util.List;
 
@@ -74,17 +69,15 @@ import javax.inject.Inject;
  * VideoDetailsFragment extends DetailsFragment, a Wrapper fragment for leanback details screens.
  * It shows a detailed view of video and its metadata plus related videos.
  */
-public class VideoDetailsFragment extends DetailsFragment implements VideoPresenter.VideoView{
+public class VideoDetailsFragment extends DetailsFragment implements VideoPresenter.VideoView {
+    public interface VideoDetailsListener {
+        void onVideoClicked(Video video, ImageCardView itemViewHolder);
+    }
+
     private static final int NO_NOTIFICATION = -1;
     private static final int ACTION_WATCH_TRAILER = 1;
     private static final int ACTION_RENT = 2;
     private static final int ACTION_BUY = 3;
-
-    // ID for loader that loads related videos.
-    private static final int RELATED_VIDEO_LOADER = 1;
-
-    // ID for loader that loads the video from global search.
-    private int mGlobalSearchVideoId = 2;
 
     private Video mSelectedVideo;
     private ArrayObjectAdapter mAdapter;
@@ -98,6 +91,20 @@ public class VideoDetailsFragment extends DetailsFragment implements VideoPresen
 
     @Inject
     VideoPresenter videoPresenter;
+
+    @Inject
+    Context context;
+
+    private VideoDetailsListener videoListener;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        if (getActivity() instanceof MainFragment.VideoListListener) {
+            this.videoListener = (VideoDetailsListener) getActivity();
+        }
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -257,7 +264,12 @@ public class VideoDetailsFragment extends DetailsFragment implements VideoPresen
 
     @Override
     public Context context() {
-        return null;
+        return this.context;
+    }
+
+    @Override
+    public void viewVideo(Video video, ImageCardView imageCardView) {
+        videoListener.onVideoClicked(video,imageCardView);
     }
 
     @Override
@@ -275,49 +287,6 @@ public class VideoDetailsFragment extends DetailsFragment implements VideoPresen
 
         HeaderItem header = new HeaderItem(0, subcategories[0]);
         mAdapter.add(new ListRow(header,adapter));
-    }
-
-    static class MovieDetailsOverviewLogoPresenter extends DetailsOverviewLogoPresenter {
-
-        static class ViewHolder extends DetailsOverviewLogoPresenter.ViewHolder {
-            public ViewHolder(View view) {
-                super(view);
-            }
-
-            public FullWidthDetailsOverviewRowPresenter getParentPresenter() {
-                return mParentPresenter;
-            }
-
-            public FullWidthDetailsOverviewRowPresenter.ViewHolder getParentViewHolder() {
-                return mParentViewHolder;
-            }
-        }
-
-        @Override
-        public Presenter.ViewHolder onCreateViewHolder(ViewGroup parent) {
-            ImageView imageView = (ImageView) LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.lb_fullwidth_details_overview_logo, parent, false);
-
-            Resources res = parent.getResources();
-            int width = res.getDimensionPixelSize(R.dimen.detail_thumb_width);
-            int height = res.getDimensionPixelSize(R.dimen.detail_thumb_height);
-            imageView.setLayoutParams(new ViewGroup.MarginLayoutParams(width, height));
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-
-            return new ViewHolder(imageView);
-        }
-
-        @Override
-        public void onBindViewHolder(Presenter.ViewHolder viewHolder, Object item) {
-            DetailsOverviewRow row = (DetailsOverviewRow) item;
-            ImageView imageView = ((ImageView) viewHolder.view);
-            imageView.setImageDrawable(row.getImageDrawable());
-            if (isBoundToImage((ViewHolder) viewHolder, row)) {
-                MovieDetailsOverviewLogoPresenter.ViewHolder vh =
-                        (MovieDetailsOverviewLogoPresenter.ViewHolder) viewHolder;
-                vh.getParentPresenter().notifyOnBindLogo(vh.getParentViewHolder());
-            }
-        }
     }
 
     private void setupDetailsOverviewRow() {
@@ -357,17 +326,7 @@ public class VideoDetailsFragment extends DetailsFragment implements VideoPresen
         public void onItemClicked(Presenter.ViewHolder itemViewHolder, Object item,
                 RowPresenter.ViewHolder rowViewHolder, Row row) {
 
-            if (item instanceof Video) {
-                Video video = (Video) item;
-                Intent intent = new Intent(getActivity(), VideoDetailsActivity.class);
-                intent.putExtra(VideoDetailsActivity.VIDEO, video);
-
-                Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                        getActivity(),
-                        ((ImageCardView) itemViewHolder.view).getMainImageView(),
-                        VideoDetailsActivity.SHARED_ELEMENT_NAME).toBundle();
-                getActivity().startActivity(intent, bundle);
-            }
+            videoPresenter.onVideoClicked(itemViewHolder,item,rowViewHolder,row);
         }
     }
 }

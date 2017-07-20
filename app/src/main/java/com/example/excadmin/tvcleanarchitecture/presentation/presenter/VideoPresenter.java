@@ -1,6 +1,9 @@
 package com.example.excadmin.tvcleanarchitecture.presentation.presenter;
 
 import android.support.annotation.NonNull;
+import android.support.v17.leanback.widget.ImageCardView;
+import android.support.v17.leanback.widget.Row;
+import android.support.v17.leanback.widget.RowPresenter;
 
 import com.example.excadmin.tvcleanarchitecture.domain.exception.DefaultErrorBundle;
 import com.example.excadmin.tvcleanarchitecture.domain.exception.ErrorBundle;
@@ -106,6 +109,14 @@ public class VideoPresenter extends Presenter{
 
     }
 
+    public void onVideoClicked(android.support.v17.leanback.widget.Presenter.ViewHolder itemViewHolder, Object item,
+                               RowPresenter.ViewHolder rowViewHolder, Row row) {
+        Video video = (Video) item;
+        ImageCardView imageCardView = ((ImageCardView) itemViewHolder.view);
+
+        this.mVideoView.viewVideo(video, imageCardView);
+    }
+
     private final class LatestVideoObserver extends DefaultObserver<List<Video>> {
         @Override
         public void onComplete() {
@@ -128,7 +139,7 @@ public class VideoPresenter extends Presenter{
 
 
     public interface VideoView extends LoadDataView {
-
+        void viewVideo(Video video, ImageCardView imageCardView);
         void renderVideo(Video video);
         void renderLatestVideoList(List<Video> latestVideos);
     }
