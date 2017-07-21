@@ -30,7 +30,7 @@ import com.example.excadmin.tvcleanarchitecture.R;
  * PlaybackOverlayActivity for video playback that loads PlaybackOverlayFragment and handles the
  * MediaSession object used to maintain the state of the media playback.
  */
-public class PlaybackOverlayActivity extends LeanbackActivity {
+public class PlaybackOverlayActivity extends BaseActivity {
     public static Intent getCallingIntent(Context context) {
         return new Intent(context, PlaybackOverlayActivity.class);
     }

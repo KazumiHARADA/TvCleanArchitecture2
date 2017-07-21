@@ -34,7 +34,7 @@ import java.util.List;
 /**
  * Activity that showcases different aspects of GuidedStepFragments.
  */
-public class GuidedStepActivity extends LeanbackActivity {
+public class GuidedStepActivity extends BaseActivity {
 
     public static Intent getCallingIntent(Context context) {
         return new Intent(context, GuidedStepActivity.class);

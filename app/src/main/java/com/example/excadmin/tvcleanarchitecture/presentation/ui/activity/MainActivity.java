@@ -35,7 +35,7 @@ import com.example.excadmin.tvcleanarchitecture.presentation.ui.fragment.Onboard
 /*
  * MainActivity class that loads MainFragment.
  */
-public class MainActivity extends LeanbackActivity implements HasComponent<FragmentComponent>,MainFragment.VideoListListener{
+public class MainActivity extends BaseActivity implements HasComponent<FragmentComponent>,MainFragment.VideoListListener{
 
     private FragmentComponent fragmentComponent;
 

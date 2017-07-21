@@ -27,7 +27,7 @@ import com.example.excadmin.tvcleanarchitecture.presentation.ui.fragment.SearchF
 /*
  * SearchActivity for SearchFragment
  */
-public class SearchActivity extends LeanbackActivity {
+public class SearchActivity extends BaseActivity {
 
     public static Intent getCallingIntent(Context context) {
         return new Intent(context, SearchActivity.class);

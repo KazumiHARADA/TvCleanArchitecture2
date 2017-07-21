@@ -15,7 +15,7 @@ import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.modules
  * Created by excadmin on 2017/07/21.
  */
 
-public class ApiRequestActivity extends LeanbackActivity implements HasComponent<FragmentComponent> {
+public class ApiRequestActivity extends BaseActivity implements HasComponent<FragmentComponent> {
     public static Intent getCallingIntent(Context context) {
         return new Intent(context, ApiRequestActivity.class);
     }

@@ -23,7 +23,7 @@ import com.example.excadmin.tvcleanarchitecture.R;
 /*
  * OnboardingActivity for OnboardingFragment
  */
-public class OnboardingActivity extends LeanbackActivity {
+public class OnboardingActivity extends BaseActivity {
 
     /**
      * Called when the activity is first created.

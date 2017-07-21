@@ -33,7 +33,7 @@ import com.example.excadmin.tvcleanarchitecture.presentation.ui.fragment.VideoDe
 /*
  * Details activity class that loads VideoDetailsFragment class
  */
-public class VideoDetailsActivity extends LeanbackActivity implements HasComponent<FragmentComponent>,VideoDetailsFragment.VideoDetailsListener {
+public class VideoDetailsActivity extends BaseActivity implements HasComponent<FragmentComponent>,VideoDetailsFragment.VideoDetailsListener {
 
     public static Intent getCallingIntent(Context context) {
         return new Intent(context, VideoDetailsActivity.class);

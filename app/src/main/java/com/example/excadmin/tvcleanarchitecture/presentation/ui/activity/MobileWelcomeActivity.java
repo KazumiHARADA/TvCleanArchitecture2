@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import com.example.excadmin.tvcleanarchitecture.R;
 
-public class MobileWelcomeActivity extends LeanbackActivity {
+public class MobileWelcomeActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

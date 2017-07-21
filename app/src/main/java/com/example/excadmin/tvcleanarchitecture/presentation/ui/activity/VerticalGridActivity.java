@@ -25,7 +25,7 @@ import com.example.excadmin.tvcleanarchitecture.R;
 /*
  * VerticalGridActivity that loads VerticalGridFragment
  */
-public class VerticalGridActivity extends LeanbackActivity {
+public class VerticalGridActivity extends BaseActivity {
 
     public static Intent getCallingIntent(Context context) {
         return new Intent(context, VerticalGridActivity.class);

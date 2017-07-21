@@ -14,7 +14,7 @@ import javax.inject.Inject;
 /**
  * This parent class contains common methods that run in every activity such as search.
  */
-public abstract class LeanbackActivity extends FragmentActivity {
+public abstract class BaseActivity extends FragmentActivity {
 
     @Inject
     Navigator navigator;

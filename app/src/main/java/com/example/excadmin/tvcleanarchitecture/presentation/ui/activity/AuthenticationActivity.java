@@ -29,7 +29,7 @@ import com.example.excadmin.tvcleanarchitecture.R;
 
 import java.util.List;
 
-public class AuthenticationActivity extends LeanbackActivity {
+public class AuthenticationActivity extends BaseActivity {
     private static final int CONTINUE = 2;
 
     @Override

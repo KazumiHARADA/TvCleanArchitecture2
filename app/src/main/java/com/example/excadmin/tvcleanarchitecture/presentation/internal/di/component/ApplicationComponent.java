@@ -21,7 +21,7 @@ import com.example.excadmin.tvcleanarchitecture.domain.executor.PostExecutionThr
 import com.example.excadmin.tvcleanarchitecture.domain.executor.ThreadExecutor;
 import com.example.excadmin.tvcleanarchitecture.domain.repository.VideoRepository;
 import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.modules.ApplicationModule;
-import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.LeanbackActivity;
+import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.BaseActivity;
 
 import javax.inject.Singleton;
 
@@ -33,7 +33,7 @@ import dagger.Component;
 @Singleton // Constraints this component to one-per-application or unscoped bindings.
 @Component(modules = ApplicationModule.class)
 public interface ApplicationComponent {
-  void inject(LeanbackActivity baseActivity);
+  void inject(BaseActivity baseActivity);
 
   //Exposed to sub-graphs.
   Context context();

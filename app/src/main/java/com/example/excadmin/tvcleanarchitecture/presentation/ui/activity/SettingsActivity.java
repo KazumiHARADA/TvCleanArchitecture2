@@ -22,7 +22,7 @@ import android.os.Bundle;
 
 import com.example.excadmin.tvcleanarchitecture.R;
 
-public class SettingsActivity extends LeanbackActivity {
+public class SettingsActivity extends BaseActivity {
     public static Intent getCallingIntent(Context context) {
         return new Intent(context, SettingsActivity.class);
     }
