@@ -24,6 +24,7 @@ import android.support.v4.app.ActivityOptionsCompat;
 
 import com.example.excadmin.tvcleanarchitecture.R;
 import com.example.excadmin.tvcleanarchitecture.domain.model.Video;
+import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.ApiRequestsActivity;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.GuidedStepActivity;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.PlaybackOverlayActivity;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.SearchActivity;
@@ -106,4 +107,8 @@ public class Navigator {
         context.startActivity(intent);
     }
 
+    public void navigateToApiRequests(Context context) {
+        Intent intent = ApiRequestsActivity.getCallingIntent(context);
+        context.startActivity(intent);
+    }
 }

@@ -110,6 +110,8 @@ public class VideoListPresenter extends Presenter {
                 this.mVideoListView.viewError();
             } else if (((String) item).contains(this.mVideoListView.context().getString(R.string.personal_settings))) {
                 this.mVideoListView.viewSetting();
+            } else if (((String) item).contains(this.mVideoListView.context().getString(R.string.api_requests))) {
+                this.mVideoListView.viewApiRequests();
             } else {
                 this.mVideoListView.viewError();
             }
@@ -170,6 +172,8 @@ public class VideoListPresenter extends Presenter {
         void viewGrid();
 
         void viewSearch();
+
+        void viewApiRequests();
 
     }
 }

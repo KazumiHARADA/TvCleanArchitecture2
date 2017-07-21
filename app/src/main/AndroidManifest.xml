@@ -135,6 +135,11 @@
         <activity
             android:name=".presentation.ui.activity.AuthenticationActivity"
             android:theme="@style/Theme.Example.Leanback.GuidedStep" />
+
+        <activity android:name=".presentation.ui.activity.ApiRequestsActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Leanback"
+            />
     </application>
 
 </manifest>

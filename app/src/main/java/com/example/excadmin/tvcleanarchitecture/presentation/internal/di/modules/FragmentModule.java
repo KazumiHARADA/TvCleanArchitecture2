@@ -21,7 +21,7 @@ import dagger.Module;
  * Dagger module that provides user related collaborators.
  */
 @Module
-public class VideoModule {
+public class FragmentModule {
 
-  public VideoModule() {}
+  public FragmentModule() {}
 }

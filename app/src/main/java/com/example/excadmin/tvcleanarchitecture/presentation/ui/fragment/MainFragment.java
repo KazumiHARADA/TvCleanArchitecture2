@@ -77,6 +77,8 @@ public class MainFragment extends BrowseFragment implements VideoListPresenter.V
         void onGridClicked();
 
         void onSearchClicked();
+
+        void onApiRequestsClicked();
     }
 
     private static final int BACKGROUND_UPDATE_DELAY = 300;
@@ -291,6 +293,7 @@ public class MainFragment extends BrowseFragment implements VideoListPresenter.V
         HeaderItem gridHeader = new HeaderItem(getString(R.string.more_samples));
         GridItemPresenter gridPresenter = new GridItemPresenter(this);
         ArrayObjectAdapter gridRowAdapter = new ArrayObjectAdapter(gridPresenter);
+        gridRowAdapter.add(getString(R.string.api_requests));
         gridRowAdapter.add(getString(R.string.grid_view));
         gridRowAdapter.add(getString(R.string.guidedstep_first_title));
         gridRowAdapter.add(getString(R.string.error_fragment));
@@ -329,6 +332,11 @@ public class MainFragment extends BrowseFragment implements VideoListPresenter.V
     @Override
     public void viewSearch() {
         videoListListener.onSearchClicked();
+    }
+
+    @Override
+    public void viewApiRequests() {
+        videoListListener.onApiRequestsClicked();
     }
 
     @Override

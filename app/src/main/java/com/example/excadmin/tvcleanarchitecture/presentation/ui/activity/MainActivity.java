@@ -26,8 +26,8 @@ import com.example.excadmin.tvcleanarchitecture.AndroidApplication;
 import com.example.excadmin.tvcleanarchitecture.R;
 import com.example.excadmin.tvcleanarchitecture.domain.model.Video;
 import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.HasComponent;
-import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.component.DaggerVideoComponent;
-import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.component.VideoComponent;
+import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.component.DaggerFragmentComponent;
+import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.component.FragmentComponent;
 import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.modules.ActivityModule;
 import com.example.excadmin.tvcleanarchitecture.presentation.navigation.Navigator;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.fragment.MainFragment;
@@ -36,9 +36,9 @@ import com.example.excadmin.tvcleanarchitecture.presentation.ui.fragment.Onboard
 /*
  * MainActivity class that loads MainFragment.
  */
-public class MainActivity extends LeanbackActivity implements HasComponent<VideoComponent>,MainFragment.VideoListListener{
+public class MainActivity extends LeanbackActivity implements HasComponent<FragmentComponent>,MainFragment.VideoListListener{
 
-    private VideoComponent videoComponent;
+    private FragmentComponent fragmentComponent;
 
     Navigator navigator;
 
@@ -62,15 +62,15 @@ public class MainActivity extends LeanbackActivity implements HasComponent<Video
     }
 
     private void initializeInjector() {
-        this.videoComponent = DaggerVideoComponent.builder()
+        this.fragmentComponent = DaggerFragmentComponent.builder()
                 .applicationComponent (((AndroidApplication) getApplication()).getApplicationComponent())
                 .activityModule(new ActivityModule(this))
                 .build();
     }
 
     @Override
-    public VideoComponent getComponent() {
-        return videoComponent;
+    public FragmentComponent getComponent() {
+        return fragmentComponent;
     }
 
 
@@ -102,6 +102,11 @@ public class MainActivity extends LeanbackActivity implements HasComponent<Video
     @Override
     public void onSearchClicked() {
         navigator.navigateToSearch(this);
+    }
+
+    @Override
+    public void onApiRequestsClicked() {
+        navigator.navigateToApiRequests(this);
     }
 
 

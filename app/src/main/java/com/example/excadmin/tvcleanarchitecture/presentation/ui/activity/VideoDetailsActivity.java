@@ -25,8 +25,8 @@ import com.example.excadmin.tvcleanarchitecture.AndroidApplication;
 import com.example.excadmin.tvcleanarchitecture.R;
 import com.example.excadmin.tvcleanarchitecture.domain.model.Video;
 import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.HasComponent;
-import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.component.DaggerVideoComponent;
-import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.component.VideoComponent;
+import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.component.DaggerFragmentComponent;
+import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.component.FragmentComponent;
 import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.modules.ActivityModule;
 import com.example.excadmin.tvcleanarchitecture.presentation.navigation.Navigator;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.fragment.VideoDetailsFragment;
@@ -34,7 +34,7 @@ import com.example.excadmin.tvcleanarchitecture.presentation.ui.fragment.VideoDe
 /*
  * Details activity class that loads VideoDetailsFragment class
  */
-public class VideoDetailsActivity extends LeanbackActivity implements HasComponent<VideoComponent>,VideoDetailsFragment.VideoDetailsListener {
+public class VideoDetailsActivity extends LeanbackActivity implements HasComponent<FragmentComponent>,VideoDetailsFragment.VideoDetailsListener {
 
     public static Intent getCallingIntent(Context context) {
         return new Intent(context, VideoDetailsActivity.class);
@@ -42,7 +42,7 @@ public class VideoDetailsActivity extends LeanbackActivity implements HasCompone
 
     Navigator navigator;
 
-    private VideoComponent videoComponent;
+    private FragmentComponent fragmentComponent;
 
     public static final String SHARED_ELEMENT_NAME = "hero";
     public static final String VIDEO = "Video";
@@ -64,15 +64,15 @@ public class VideoDetailsActivity extends LeanbackActivity implements HasCompone
     }
 
     private void initializeInjector() {
-        this.videoComponent = DaggerVideoComponent.builder()
+        this.fragmentComponent = DaggerFragmentComponent.builder()
                 .applicationComponent (((AndroidApplication) getApplication()).getApplicationComponent())
                 .activityModule(new ActivityModule(this))
                 .build();
     }
 
     @Override
-    public VideoComponent getComponent() {
-        return videoComponent;
+    public FragmentComponent getComponent() {
+        return fragmentComponent;
     }
 
     @Override
