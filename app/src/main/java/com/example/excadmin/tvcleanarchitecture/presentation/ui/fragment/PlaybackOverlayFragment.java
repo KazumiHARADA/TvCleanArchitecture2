@@ -70,9 +70,9 @@ import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.Playbac
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.VideoDetailsActivity;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.helper.PlaybackControlHelper;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.viewpresenter.CardPresenter;
-import com.example.excadmin.tvcleanarchitecture.utility.Utils;
-import com.example.excadmin.tvcleanarchitecture.utility.player.ExtractorRendererBuilder;
-import com.example.excadmin.tvcleanarchitecture.utility.player.VideoPlayer;
+import com.example.excadmin.tvcleanarchitecture.presentation.util.Utils;
+import com.example.excadmin.tvcleanarchitecture.presentation.util.player.ExtractorRendererBuilder;
+import com.example.excadmin.tvcleanarchitecture.presentation.util.player.VideoPlayer;
 import com.google.android.exoplayer.ExoPlayer;
 import com.google.android.exoplayer.util.Util;
 

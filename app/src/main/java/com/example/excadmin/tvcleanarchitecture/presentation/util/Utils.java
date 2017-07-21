@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.excadmin.tvcleanarchitecture.utility;
+package com.example.excadmin.tvcleanarchitecture.presentation.util;
 
 import android.app.Activity;
 import android.content.Context;

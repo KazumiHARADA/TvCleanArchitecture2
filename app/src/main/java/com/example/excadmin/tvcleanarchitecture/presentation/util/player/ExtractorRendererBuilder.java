@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.excadmin.tvcleanarchitecture.utility.player;
+package com.example.excadmin.tvcleanarchitecture.presentation.util.player;
 
 import android.content.Context;
 import android.media.AudioManager;

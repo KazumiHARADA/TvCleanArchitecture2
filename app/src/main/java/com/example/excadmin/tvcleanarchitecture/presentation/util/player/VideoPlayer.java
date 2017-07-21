@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.excadmin.tvcleanarchitecture.utility.player;
+package com.example.excadmin.tvcleanarchitecture.presentation.util.player;
 
 import android.media.MediaCodec.CryptoException;
 import android.os.Handler;
