@@ -31,6 +31,10 @@ import com.example.excadmin.tvcleanarchitecture.R;
  * MediaSession object used to maintain the state of the media playback.
  */
 public class PlaybackOverlayActivity extends LeanbackActivity {
+    public static Intent getCallingIntent(Context context) {
+        return new Intent(context, PlaybackOverlayActivity.class);
+    }
+
     private static final float GAMEPAD_TRIGGER_INTENSITY_ON = 0.5f;
     // Off-condition slightly smaller for button debouncing
     private static final float GAMEPAD_TRIGGER_INTENSITY_OFF = 0.45f;

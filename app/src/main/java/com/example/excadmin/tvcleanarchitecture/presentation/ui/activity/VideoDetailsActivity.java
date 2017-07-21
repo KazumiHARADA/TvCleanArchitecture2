@@ -79,4 +79,9 @@ public class VideoDetailsActivity extends LeanbackActivity implements HasCompone
     public void onVideoClicked(Video video, ImageCardView itemViewHolder) {
         navigator.navigateToVideoDetail(this,video,itemViewHolder);
     }
+
+    @Override
+    public void onWatchTrailer(Video video) {
+        navigator.navigateToPlayback(this,video);
+    }
 }

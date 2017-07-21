@@ -107,14 +107,6 @@
             android:theme="@style/Theme.Example.Leanback.GuidedStep" />
 
         <!-- Provides search suggestions for keywords against video metadata. -->
-        <provider
-            android:name="com.example.excadmin.tvcleanarchitecture.data.repository.datasource.VideoProvider"
-            android:authorities="${packageName}"
-            android:exported="true">
-            <path-permission
-                android:pathPrefix="/search"
-                android:readPermission="android.permission.GLOBAL_SEARCH" />
-        </provider>
 
         <receiver
             android:name=".presentation.service.RecommendationReceiver"

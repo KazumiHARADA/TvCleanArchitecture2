@@ -25,6 +25,7 @@ import android.support.v4.app.ActivityOptionsCompat;
 import com.example.excadmin.tvcleanarchitecture.R;
 import com.example.excadmin.tvcleanarchitecture.domain.model.Video;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.GuidedStepActivity;
+import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.PlaybackOverlayActivity;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.SearchActivity;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.SettingsActivity;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.VerticalGridActivity;
@@ -97,6 +98,12 @@ public class Navigator {
     public void navigateToSearch(Context context) {
         Intent intentToLaunch = SearchActivity.getCallingIntent(context);
         context.startActivity(intentToLaunch);
+    }
+
+    public void navigateToPlayback(Context context,Video video) {
+        Intent intent = PlaybackOverlayActivity.getCallingIntent(context);
+        intent.putExtra(VideoDetailsActivity.VIDEO, video);
+        context.startActivity(intent);
     }
 
 }
