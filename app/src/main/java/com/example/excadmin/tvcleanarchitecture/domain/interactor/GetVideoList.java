@@ -25,6 +25,6 @@ public class GetVideoList extends UseCase<CategoryList,Void> {
 
     @Override
     Observable<CategoryList> buildUseCaseObservable(Void aVoid) {
-        return this.videoRepository.videosService();
+        return this.videoRepository.videos();
     }
 }

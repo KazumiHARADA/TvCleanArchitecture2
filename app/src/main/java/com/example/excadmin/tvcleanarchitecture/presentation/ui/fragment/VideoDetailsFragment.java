@@ -246,11 +246,6 @@ public class VideoDetailsFragment extends DetailsFragment implements VideoPresen
     }
 
     @Override
-    public void renderVideo(Video video) {
-
-    }
-
-    @Override
     public void renderLatestVideoList(List<Video> latestVideos) {
 
         String subcategories[] = {getString(R.string.related_movies)};

@@ -20,9 +20,6 @@ import android.database.Cursor;
 import android.util.Log;
 
 import com.example.excadmin.tvcleanarchitecture.data.entity.CategoryListEntity;
-import com.example.excadmin.tvcleanarchitecture.data.entity.VideoEntity;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -71,20 +68,5 @@ class LocalVideoDataStore implements VideoDataStore {
             }
         });
         return videoListSingle.toObservable();
-    }
-
-    @Override
-    public Observable<CategoryListEntity> videoEntityServiceList() {
-        return null;
-    }
-
-    @Override
-    public Observable<List<VideoEntity>> latestVideoEntityList(String category) {
-        return null;
-    }
-
-    @Override
-    public Observable<VideoEntity> videoEntityDetails(int videoId) {
-        return null;
     }
 }

@@ -4,10 +4,7 @@ import com.example.excadmin.tvcleanarchitecture.data.entity.mapper.VideoEntityDa
 import com.example.excadmin.tvcleanarchitecture.data.repository.datasource.VideoDataStore;
 import com.example.excadmin.tvcleanarchitecture.data.repository.datasource.VideoDataStoreFactory;
 import com.example.excadmin.tvcleanarchitecture.domain.model.CategoryList;
-import com.example.excadmin.tvcleanarchitecture.domain.model.Video;
 import com.example.excadmin.tvcleanarchitecture.domain.repository.VideoRepository;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -33,22 +30,5 @@ public class VideoDataRepository implements VideoRepository {
     public Observable<CategoryList> videos() {
         final VideoDataStore videoDataStore = this.dataStoreFactory.create();
         return videoDataStore.videoEntityList().map(this.videoEntityDataMapper::transform);
-    }
-
-    @Override
-    public Observable<CategoryList> videosService() {
-        final VideoDataStore videoDataStore = this.dataStoreFactory.create();
-        return videoDataStore.videoEntityServiceList().map(this.videoEntityDataMapper::transform);
-    }
-
-    @Override
-    public Observable<List<Video>> latestVideos(String category) {
-        final VideoDataStore videoDataStore = this.dataStoreFactory.create();
-        return videoDataStore.latestVideoEntityList(category).map(this.videoEntityDataMapper::transform);
-    }
-
-    @Override
-    public Observable<Video> video(int contentId) {
-        return null;
     }
 }

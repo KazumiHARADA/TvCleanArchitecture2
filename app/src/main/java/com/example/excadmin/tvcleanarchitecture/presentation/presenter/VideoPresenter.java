@@ -14,11 +14,11 @@ import com.example.excadmin.tvcleanarchitecture.R;
 import com.example.excadmin.tvcleanarchitecture.domain.exception.DefaultErrorBundle;
 import com.example.excadmin.tvcleanarchitecture.domain.exception.ErrorBundle;
 import com.example.excadmin.tvcleanarchitecture.domain.interactor.DefaultObserver;
-import com.example.excadmin.tvcleanarchitecture.domain.interactor.GetLatestVideoList;
-import com.example.excadmin.tvcleanarchitecture.domain.interactor.GetVideo;
+import com.example.excadmin.tvcleanarchitecture.domain.interactor.GetVideoList;
+import com.example.excadmin.tvcleanarchitecture.domain.model.CategoryList;
+import com.example.excadmin.tvcleanarchitecture.domain.model.CategoryVideoList;
 import com.example.excadmin.tvcleanarchitecture.domain.model.Video;
 import com.example.excadmin.tvcleanarchitecture.presentation.exception.ErrorMessageFactory;
-import com.example.excadmin.tvcleanarchitecture.presentation.mapper.VideoModelDataMapper;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.LoadDataView;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.VideoDetailsActivity;
 
@@ -33,9 +33,9 @@ import javax.inject.Inject;
 public class VideoPresenter extends Presenter{
 
     private VideoPresenter.VideoView mVideoView;
-    private final GetVideo getVideoUseCase;
-    private final GetLatestVideoList getLatestVideoListUseCase;
-    private final VideoModelDataMapper videoModelDataMapper;
+    private final GetVideoList getVideoListUseCase;
+
+    private String mSelectedCategory;
 
     private static final int NO_NOTIFICATION = -1;
     private static final int ACTION_WATCH_TRAILER = 1;
@@ -43,12 +43,8 @@ public class VideoPresenter extends Presenter{
     private static final int ACTION_BUY = 3;
 
     @Inject
-    public VideoPresenter(GetVideo getVideoUseCase,
-                          GetLatestVideoList getLatestVideoListUseCase,
-                              VideoModelDataMapper videoModelDataMapper) {
-        this.getVideoUseCase = getVideoUseCase;
-        this.getLatestVideoListUseCase = getLatestVideoListUseCase;
-        this.videoModelDataMapper = videoModelDataMapper;
+    public VideoPresenter(GetVideoList getLatestVideoListUseCase) {
+        this.getVideoListUseCase = getLatestVideoListUseCase;
     }
 
     public void setView(@NonNull VideoPresenter.VideoView view) {
@@ -94,7 +90,9 @@ public class VideoPresenter extends Presenter{
     }
 
     private void getLatestVideos(String category) {
-        this.getLatestVideoListUseCase.execute(new LatestVideoObserver(),category);
+        mSelectedCategory = category;
+
+        this.getVideoListUseCase.execute(new LatestVideoObserver(),null);
     }
 
     private void renderLatestVideoList(List<Video> latestVideos) {
@@ -163,7 +161,7 @@ public class VideoPresenter extends Presenter{
         }
     }
 
-    private final class LatestVideoObserver extends DefaultObserver<List<Video>> {
+    private final class LatestVideoObserver extends DefaultObserver<CategoryList> {
         @Override
         public void onComplete() {
             VideoPresenter.this.hideViewLoading();
@@ -177,9 +175,16 @@ public class VideoPresenter extends Presenter{
         }
 
         @Override
-        public void onNext(List<Video> latestVideos) {
+        public void onNext(CategoryList categoryList) {
+            for (CategoryVideoList categoryVideoList : categoryList.getGooglevideos()) {
+                if (categoryVideoList.getCategory().contains(mSelectedCategory)) {
+                    VideoPresenter.this.hideViewLoading();
+                    VideoPresenter.this.renderLatestVideoList(categoryVideoList.getVideos());
+                    return;
+                }
+            }
             VideoPresenter.this.hideViewLoading();
-            VideoPresenter.this.renderLatestVideoList(latestVideos);
+            VideoPresenter.this.showViewRetry();
         }
     }
 
@@ -187,7 +192,6 @@ public class VideoPresenter extends Presenter{
     public interface VideoView extends LoadDataView {
         void viewVideo(Video video, ImageCardView imageCardView);
         void viewTrailer(Video video);
-        void renderVideo(Video video);
         void renderLatestVideoList(List<Video> latestVideos);
     }
 }
