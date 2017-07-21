@@ -5,6 +5,7 @@ import android.content.Context;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -20,12 +21,15 @@ public class ServiceGenerator {
     private static Context mContext;
 
     public static <S> S createService(Class<S> serviceClass) {
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
         httpClient = new OkHttpClient.Builder();
         builder = new Retrofit.Builder()
                 .baseUrl(API_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create());
 
-        OkHttpClient client = httpClient.build();
+        OkHttpClient client = httpClient.addInterceptor(interceptor).build();
         Retrofit retrofit = builder
                 .client(client)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
