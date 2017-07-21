@@ -74,6 +74,11 @@ class LocalVideoDataStore implements VideoDataStore {
     }
 
     @Override
+    public Observable<CategoryListEntity> videoEntityServiceList() {
+        return null;
+    }
+
+    @Override
     public Observable<List<VideoEntity>> latestVideoEntityList(String category) {
         return null;
     }

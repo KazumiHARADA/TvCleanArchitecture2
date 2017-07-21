@@ -1,6 +1,8 @@
 package com.example.excadmin.tvcleanarchitecture.data.repository.datasource;
 
+import com.example.excadmin.tvcleanarchitecture.data.api.APIClient;
 import com.example.excadmin.tvcleanarchitecture.data.api.RestApi;
+import com.example.excadmin.tvcleanarchitecture.data.api.ServiceGenerator;
 import com.example.excadmin.tvcleanarchitecture.data.entity.CategoryListEntity;
 import com.example.excadmin.tvcleanarchitecture.data.entity.VideoEntity;
 
@@ -25,6 +27,12 @@ public class RemoteVideoDataStore implements VideoDataStore{
     @Override
     public Observable<CategoryListEntity> videoEntityList() {
         return this.restApi.videoEntityList();
+    }
+
+    @Override
+    public Observable<CategoryListEntity> videoEntityServiceList() {
+        APIClient client = ServiceGenerator.createService(APIClient.class);
+        return client.videoEntityList();
     }
 
     @Override

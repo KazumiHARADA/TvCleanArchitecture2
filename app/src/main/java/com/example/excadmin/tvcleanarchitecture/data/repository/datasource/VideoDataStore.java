@@ -34,6 +34,11 @@ public interface VideoDataStore {
   /**
    * Get an {@link Observable} which will emit a List of {@link VideoEntity}.
    */
+  Observable<CategoryListEntity> videoEntityServiceList();
+
+  /**
+   * Get an {@link Observable} which will emit a List of {@link VideoEntity}.
+   */
   Observable<List<VideoEntity>> latestVideoEntityList(String category);
 
   /**

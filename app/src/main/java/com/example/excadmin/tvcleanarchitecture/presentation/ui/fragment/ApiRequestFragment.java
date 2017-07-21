@@ -11,10 +11,11 @@ import android.support.v17.leanback.widget.Presenter;
 import android.support.v17.leanback.widget.Row;
 import android.support.v17.leanback.widget.RowPresenter;
 import android.support.v17.leanback.widget.VerticalGridPresenter;
+import android.view.View;
 
 import com.example.excadmin.tvcleanarchitecture.R;
 import com.example.excadmin.tvcleanarchitecture.presentation.presenter.ApiRequestPresenter;
-import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.ApiRequestsActivity;
+import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.ApiRequestActivity;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.SearchActivity;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.viewpresenter.ApiPresenter;
 
@@ -39,7 +40,7 @@ public class ApiRequestFragment extends android.support.v17.leanback.app.Vertica
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ((ApiRequestsActivity) getActivity()).getComponent().inject(this);
+        ((ApiRequestActivity) getActivity()).getComponent().inject(this);
 
         mApiListAdapter.add("login");
         mApiListAdapter.add("list");
@@ -51,6 +52,15 @@ public class ApiRequestFragment extends android.support.v17.leanback.app.Vertica
             prepareEntranceTransition();
         }
         setupFragment();
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        this.apiRequestPresenter.setView(this);
+        if (savedInstanceState == null) {
+            this.apiRequestPresenter.initialize();
+        }
     }
 
     private void setupFragment() {

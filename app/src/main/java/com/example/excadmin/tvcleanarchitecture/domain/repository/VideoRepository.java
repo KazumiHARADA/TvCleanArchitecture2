@@ -15,6 +15,8 @@ public interface VideoRepository {
 
     Observable<CategoryList> videos();
 
+    Observable<CategoryList> videosService();
+
     Observable<List<Video>> latestVideos(final String category);
 
     Observable<Video> video(final int contentId);

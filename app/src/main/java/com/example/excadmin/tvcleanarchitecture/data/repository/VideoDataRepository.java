@@ -36,6 +36,12 @@ public class VideoDataRepository implements VideoRepository {
     }
 
     @Override
+    public Observable<CategoryList> videosService() {
+        final VideoDataStore videoDataStore = this.dataStoreFactory.create();
+        return videoDataStore.videoEntityServiceList().map(this.videoEntityDataMapper::transform);
+    }
+
+    @Override
     public Observable<List<Video>> latestVideos(String category) {
         final VideoDataStore videoDataStore = this.dataStoreFactory.create();
         return videoDataStore.latestVideoEntityList(category).map(this.videoEntityDataMapper::transform);

@@ -136,7 +136,7 @@
             android:name=".presentation.ui.activity.AuthenticationActivity"
             android:theme="@style/Theme.Example.Leanback.GuidedStep" />
 
-        <activity android:name=".presentation.ui.activity.ApiRequestsActivity"
+        <activity android:name=".presentation.ui.activity.ApiRequestActivity"
             android:exported="true"
             android:theme="@style/Theme.Leanback"
             />
