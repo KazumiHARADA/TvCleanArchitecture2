@@ -44,4 +44,9 @@ public class ApiRequestActivity extends LeanbackActivity implements HasComponent
     public FragmentComponent getComponent() {
         return fragmentComponent;
     }
+
+    @Override
+    boolean isSearchEnabled() {
+        return false;
+    }
 }

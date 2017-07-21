@@ -16,7 +16,6 @@
 
 package com.example.excadmin.tvcleanarchitecture.presentation.ui.activity;
 
-import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
@@ -35,7 +34,7 @@ import java.util.List;
 /**
  * Activity that showcases different aspects of GuidedStepFragments.
  */
-public class GuidedStepActivity extends Activity {
+public class GuidedStepActivity extends LeanbackActivity {
 
     public static Intent getCallingIntent(Context context) {
         return new Intent(context, GuidedStepActivity.class);
@@ -84,6 +83,11 @@ public class GuidedStepActivity extends Activity {
                 .build();
         guidedAction.setChecked(checked);
         actions.add(guidedAction);
+    }
+
+    @Override
+    boolean isSearchEnabled() {
+        return false;
     }
 
     public static class FirstStepFragment extends GuidedStepFragment {

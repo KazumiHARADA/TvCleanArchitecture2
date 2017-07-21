@@ -40,4 +40,9 @@ public class VerticalGridActivity extends LeanbackActivity {
         setContentView(R.layout.vertical_grid);
         getWindow().setBackgroundDrawableResource(R.drawable.grid_bg);
     }
+
+    @Override
+    boolean isSearchEnabled() {
+        return true;
+    }
 }

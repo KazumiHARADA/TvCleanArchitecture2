@@ -28,7 +28,6 @@ import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.HasComp
 import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.component.DaggerFragmentComponent;
 import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.component.FragmentComponent;
 import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.modules.ActivityModule;
-import com.example.excadmin.tvcleanarchitecture.presentation.navigation.Navigator;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.fragment.VideoDetailsFragment;
 
 /*
@@ -39,8 +38,6 @@ public class VideoDetailsActivity extends LeanbackActivity implements HasCompone
     public static Intent getCallingIntent(Context context) {
         return new Intent(context, VideoDetailsActivity.class);
     }
-
-    Navigator navigator;
 
     private FragmentComponent fragmentComponent;
 
@@ -54,9 +51,6 @@ public class VideoDetailsActivity extends LeanbackActivity implements HasCompone
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //FIXME use dagger2
-        navigator = new Navigator();
 
         this.initializeInjector();
 
@@ -83,5 +77,10 @@ public class VideoDetailsActivity extends LeanbackActivity implements HasCompone
     @Override
     public void onWatchTrailer(Video video) {
         navigator.navigateToPlayback(this,video);
+    }
+
+    @Override
+    boolean isSearchEnabled() {
+        return true;
     }
 }

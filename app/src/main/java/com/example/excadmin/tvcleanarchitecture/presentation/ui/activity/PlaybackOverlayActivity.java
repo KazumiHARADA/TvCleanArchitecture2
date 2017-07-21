@@ -111,4 +111,9 @@ public class PlaybackOverlayActivity extends LeanbackActivity {
                 && context.getPackageManager().hasSystemFeature(
                         PackageManager.FEATURE_PICTURE_IN_PICTURE);
     }
+
+    @Override
+    boolean isSearchEnabled() {
+        return true;
+    }
 }

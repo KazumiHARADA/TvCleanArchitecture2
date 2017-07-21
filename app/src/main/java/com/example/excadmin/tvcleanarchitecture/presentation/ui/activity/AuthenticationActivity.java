@@ -16,7 +16,6 @@
 
 package com.example.excadmin.tvcleanarchitecture.presentation.ui.activity;
 
-import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -30,7 +29,7 @@ import com.example.excadmin.tvcleanarchitecture.R;
 
 import java.util.List;
 
-public class AuthenticationActivity extends Activity {
+public class AuthenticationActivity extends LeanbackActivity {
     private static final int CONTINUE = 2;
 
     @Override
@@ -39,6 +38,11 @@ public class AuthenticationActivity extends Activity {
         if (null == savedInstanceState) {
             GuidedStepFragment.addAsRoot(this, new FirstStepFragment(), android.R.id.content);
         }
+    }
+
+    @Override
+    boolean isSearchEnabled() {
+        return false;
     }
 
     public static class FirstStepFragment extends GuidedStepFragment {

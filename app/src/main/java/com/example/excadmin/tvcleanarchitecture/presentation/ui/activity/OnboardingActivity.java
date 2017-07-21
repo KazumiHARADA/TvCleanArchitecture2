@@ -16,7 +16,6 @@
 
 package com.example.excadmin.tvcleanarchitecture.presentation.ui.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 
 import com.example.excadmin.tvcleanarchitecture.R;
@@ -24,7 +23,7 @@ import com.example.excadmin.tvcleanarchitecture.R;
 /*
  * OnboardingActivity for OnboardingFragment
  */
-public class OnboardingActivity extends Activity {
+public class OnboardingActivity extends LeanbackActivity {
 
     /**
      * Called when the activity is first created.
@@ -33,5 +32,10 @@ public class OnboardingActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.onboarding);
+    }
+
+    @Override
+    boolean isSearchEnabled() {
+        return false;
     }
 }

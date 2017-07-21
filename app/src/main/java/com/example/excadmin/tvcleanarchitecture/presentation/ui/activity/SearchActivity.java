@@ -56,6 +56,11 @@ public class SearchActivity extends LeanbackActivity {
     }
 
     @Override
+    boolean isSearchEnabled() {
+        return true;
+    }
+
+    @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         // If there are no results found, press the left key to reselect the microphone
         if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT && !mFragment.hasResults()) {

@@ -29,7 +29,6 @@ import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.HasComp
 import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.component.DaggerFragmentComponent;
 import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.component.FragmentComponent;
 import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.modules.ActivityModule;
-import com.example.excadmin.tvcleanarchitecture.presentation.navigation.Navigator;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.fragment.MainFragment;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.fragment.OnboardingFragment;
 
@@ -40,14 +39,9 @@ public class MainActivity extends LeanbackActivity implements HasComponent<Fragm
 
     private FragmentComponent fragmentComponent;
 
-    Navigator navigator;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //FIXME use dagger2
-        navigator = new Navigator();
 
         this.initializeInjector();
         if (savedInstanceState == null) {
@@ -110,4 +104,8 @@ public class MainActivity extends LeanbackActivity implements HasComponent<Fragm
     }
 
 
+    @Override
+    boolean isSearchEnabled() {
+        return true;
+    }
 }

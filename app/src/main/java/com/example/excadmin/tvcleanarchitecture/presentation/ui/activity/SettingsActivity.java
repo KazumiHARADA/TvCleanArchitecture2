@@ -16,14 +16,13 @@
 
 package com.example.excadmin.tvcleanarchitecture.presentation.ui.activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.excadmin.tvcleanarchitecture.R;
 
-public class SettingsActivity extends Activity {
+public class SettingsActivity extends LeanbackActivity {
     public static Intent getCallingIntent(Context context) {
         return new Intent(context, SettingsActivity.class);
     }
@@ -32,5 +31,10 @@ public class SettingsActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_fragment);
+    }
+
+    @Override
+    boolean isSearchEnabled() {
+        return false;
     }
 }
