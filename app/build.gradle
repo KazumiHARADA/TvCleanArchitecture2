@@ -70,4 +70,6 @@ dependencies {
 
     // annotation
     compile 'com.google.guava:guava:19.0-rc2'
+
+    testCompile 'org.assertj:assertj-core:3.2.0'
 }
