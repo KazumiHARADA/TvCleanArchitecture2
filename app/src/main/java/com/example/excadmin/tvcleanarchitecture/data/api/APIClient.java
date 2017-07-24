@@ -2,7 +2,7 @@ package com.example.excadmin.tvcleanarchitecture.data.api;
 
 import com.example.excadmin.tvcleanarchitecture.data.entity.CategoryListEntity;
 
-import retrofit2.Call;
+import io.reactivex.Observable;
 import retrofit2.http.GET;
 
 /**
@@ -12,5 +12,5 @@ import retrofit2.http.GET;
 public interface APIClient {
 
     @GET("/android-tv/android_tv_videos_new.json")
-    Call<CategoryListEntity> videoEntityList();
+    Observable<CategoryListEntity> videoEntityList();
 }
