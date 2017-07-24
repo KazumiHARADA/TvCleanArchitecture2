@@ -2,8 +2,7 @@ package com.example.excadmin.tvcleanarchitecture;
 
 import android.content.ContentValues;
 
-import com.example.excadmin.tvcleanarchitecture.data.repository.datasource.VideoContract;
-import com.example.excadmin.tvcleanarchitecture.data.repository.datasource.VideoDbBuilder;
+import com.example.excadmin.tvcleanarchitecture.presentation.util.VideoContract;
 
 import junit.framework.Assert;
 

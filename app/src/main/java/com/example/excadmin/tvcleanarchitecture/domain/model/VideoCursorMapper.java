@@ -19,7 +19,7 @@ package com.example.excadmin.tvcleanarchitecture.domain.model;
 import android.database.Cursor;
 import android.support.v17.leanback.database.CursorMapper;
 
-import com.example.excadmin.tvcleanarchitecture.data.repository.datasource.VideoContract;
+import com.example.excadmin.tvcleanarchitecture.presentation.util.VideoContract;
 
 /**
  * VideoCursorMapper maps a database Cursor to a Video object.

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.excadmin.tvcleanarchitecture.data.repository.datasource;
+package com.example.excadmin.tvcleanarchitecture.presentation.util;
 
 import android.app.SearchManager;
 import android.content.ContentResolver;

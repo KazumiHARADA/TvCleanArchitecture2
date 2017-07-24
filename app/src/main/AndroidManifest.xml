@@ -118,9 +118,6 @@
         </receiver>
 
         <service
-            android:name=".presentation.service.FetchVideoService"
-            android:exported="false" />
-        <service
             android:name=".presentation.service.UpdateRecommendationsService"
             android:enabled="true" />
 
