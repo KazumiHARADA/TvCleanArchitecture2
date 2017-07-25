@@ -36,8 +36,8 @@ import android.view.View;
 
 import com.example.excadmin.tvcleanarchitecture.R;
 import com.example.excadmin.tvcleanarchitecture.presentation.util.VideoContract;
-import com.example.excadmin.tvcleanarchitecture.domain.model.Video;
-import com.example.excadmin.tvcleanarchitecture.domain.model.VideoCursorMapper;
+import com.example.excadmin.tvcleanarchitecture.domain.dto.Video;
+import com.example.excadmin.tvcleanarchitecture.domain.dto.VideoCursorMapper;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.viewpresenter.CardPresenter;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.SearchActivity;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.VideoDetailsActivity;

@@ -5,7 +5,7 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.example.excadmin.tvcleanarchitecture.domain.model.Video;
+import com.example.excadmin.tvcleanarchitecture.domain.dto.Video;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

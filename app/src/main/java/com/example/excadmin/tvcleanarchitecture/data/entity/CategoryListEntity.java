@@ -11,9 +11,13 @@ import java.util.List;
 public class CategoryListEntity {
 
     @SerializedName("googlevideos")
-    List<CategoryVideoListEntity> googlevideos;
+    private List<CategoryVideoListEntity> googlevideos;
 
     public List<CategoryVideoListEntity> getGooglevideos() {
         return googlevideos;
+    }
+
+    public void setGooglevideos(List<CategoryVideoListEntity> googlevideos) {
+        this.googlevideos = googlevideos;
     }
 }

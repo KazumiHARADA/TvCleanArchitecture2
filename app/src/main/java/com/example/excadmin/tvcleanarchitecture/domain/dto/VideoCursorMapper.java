@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.excadmin.tvcleanarchitecture.domain.model;
+package com.example.excadmin.tvcleanarchitecture.domain.dto;
 
 import android.database.Cursor;
 import android.support.v17.leanback.database.CursorMapper;

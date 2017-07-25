@@ -11,8 +11,8 @@ import com.example.excadmin.tvcleanarchitecture.domain.exception.DefaultErrorBun
 import com.example.excadmin.tvcleanarchitecture.domain.exception.ErrorBundle;
 import com.example.excadmin.tvcleanarchitecture.domain.interactor.DefaultObserver;
 import com.example.excadmin.tvcleanarchitecture.domain.interactor.GetVideoList;
-import com.example.excadmin.tvcleanarchitecture.domain.model.CategoryList;
-import com.example.excadmin.tvcleanarchitecture.domain.model.Video;
+import com.example.excadmin.tvcleanarchitecture.domain.dto.CategoryList;
+import com.example.excadmin.tvcleanarchitecture.domain.dto.Video;
 import com.example.excadmin.tvcleanarchitecture.presentation.exception.ErrorMessageFactory;
 import com.example.excadmin.tvcleanarchitecture.presentation.mapper.VideoModelDataMapper;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.LoadDataView;

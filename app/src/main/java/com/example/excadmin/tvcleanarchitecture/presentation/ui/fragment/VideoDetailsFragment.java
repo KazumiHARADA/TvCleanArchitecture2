@@ -47,7 +47,7 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.example.excadmin.tvcleanarchitecture.R;
 import com.example.excadmin.tvcleanarchitecture.presentation.util.VideoContract;
-import com.example.excadmin.tvcleanarchitecture.domain.model.Video;
+import com.example.excadmin.tvcleanarchitecture.domain.dto.Video;
 import com.example.excadmin.tvcleanarchitecture.presentation.presenter.VideoPresenter;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.VideoDetailsActivity;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.viewpresenter.CardPresenter;

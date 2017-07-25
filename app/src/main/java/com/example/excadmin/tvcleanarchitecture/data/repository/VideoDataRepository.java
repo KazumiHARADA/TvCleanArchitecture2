@@ -1,9 +1,9 @@
 package com.example.excadmin.tvcleanarchitecture.data.repository;
 
-import com.example.excadmin.tvcleanarchitecture.data.entity.mapper.VideoEntityDataMapper;
+import com.example.excadmin.tvcleanarchitecture.data.mapper.VideoEntityDtoMapper;
 import com.example.excadmin.tvcleanarchitecture.data.repository.datasource.VideoDataStore;
 import com.example.excadmin.tvcleanarchitecture.data.repository.datasource.VideoDataStoreFactory;
-import com.example.excadmin.tvcleanarchitecture.domain.model.CategoryList;
+import com.example.excadmin.tvcleanarchitecture.domain.dto.CategoryList;
 import com.example.excadmin.tvcleanarchitecture.domain.repository.VideoRepository;
 
 import javax.inject.Inject;
@@ -17,18 +17,18 @@ import io.reactivex.Observable;
 public class VideoDataRepository implements VideoRepository {
 
     private final VideoDataStoreFactory dataStoreFactory;
-    private final VideoEntityDataMapper videoEntityDataMapper;
+    private final VideoEntityDtoMapper videoEntityDtoMapper;
 
     @Inject
     VideoDataRepository(VideoDataStoreFactory dataStoreFactory,
-                        VideoEntityDataMapper videoEntityDataMapper) {
+                        VideoEntityDtoMapper videoEntityDtoMapper) {
         this.dataStoreFactory = dataStoreFactory;
-        this.videoEntityDataMapper = videoEntityDataMapper;
+        this.videoEntityDtoMapper = videoEntityDtoMapper;
     }
 
     @Override
     public Observable<CategoryList> videos() {
         final VideoDataStore videoDataStore = this.dataStoreFactory.create();
-        return videoDataStore.videoEntityList().map(this.videoEntityDataMapper::transform);
+        return videoDataStore.videoEntityList().map(this.videoEntityDtoMapper::transform);
     }
 }

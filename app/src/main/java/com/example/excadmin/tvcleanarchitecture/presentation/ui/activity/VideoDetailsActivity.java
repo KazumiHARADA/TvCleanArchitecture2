@@ -23,7 +23,7 @@ import android.support.v17.leanback.widget.ImageCardView;
 
 import com.example.excadmin.tvcleanarchitecture.AndroidApplication;
 import com.example.excadmin.tvcleanarchitecture.R;
-import com.example.excadmin.tvcleanarchitecture.domain.model.Video;
+import com.example.excadmin.tvcleanarchitecture.domain.dto.Video;
 import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.HasComponent;
 import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.component.DaggerFragmentComponent;
 import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.component.FragmentComponent;

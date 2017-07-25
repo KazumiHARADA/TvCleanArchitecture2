@@ -17,7 +17,7 @@ package com.example.excadmin.tvcleanarchitecture.presentation.mapper;
 
 
 import com.example.excadmin.tvcleanarchitecture.data.entity.VideoEntity;
-import com.example.excadmin.tvcleanarchitecture.domain.model.Video;
+import com.example.excadmin.tvcleanarchitecture.domain.dto.Video;
 import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.PerActivity;
 
 import javax.inject.Inject;

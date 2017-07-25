@@ -25,7 +25,7 @@ import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
 import com.example.excadmin.tvcleanarchitecture.R;
-import com.example.excadmin.tvcleanarchitecture.domain.model.Video;
+import com.example.excadmin.tvcleanarchitecture.domain.dto.Video;
 
 /*
  * A CardPresenter is used to generate Views and bind Objects to them on demand.

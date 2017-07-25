@@ -1,4 +1,4 @@
-package com.example.excadmin.tvcleanarchitecture.domain.model;
+package com.example.excadmin.tvcleanarchitecture.domain.dto;
 
 import java.util.List;
 

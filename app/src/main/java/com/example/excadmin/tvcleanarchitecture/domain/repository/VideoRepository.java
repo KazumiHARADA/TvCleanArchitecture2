@@ -1,6 +1,6 @@
 package com.example.excadmin.tvcleanarchitecture.domain.repository;
 
-import com.example.excadmin.tvcleanarchitecture.domain.model.CategoryList;
+import com.example.excadmin.tvcleanarchitecture.domain.dto.CategoryList;
 
 import io.reactivex.Observable;
 

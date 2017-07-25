@@ -2,7 +2,7 @@ package com.example.excadmin.tvcleanarchitecture.domain.interactor;
 
 import com.example.excadmin.tvcleanarchitecture.domain.executor.PostExecutionThread;
 import com.example.excadmin.tvcleanarchitecture.domain.executor.ThreadExecutor;
-import com.example.excadmin.tvcleanarchitecture.domain.model.CategoryList;
+import com.example.excadmin.tvcleanarchitecture.domain.dto.CategoryList;
 import com.example.excadmin.tvcleanarchitecture.domain.repository.VideoRepository;
 
 import javax.inject.Inject;

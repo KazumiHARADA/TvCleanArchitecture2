@@ -1,36 +1,30 @@
-package com.example.excadmin.tvcleanarchitecture.data.entity;
+package com.example.excadmin.tvcleanarchitecture.data.entity.realm;
 
-import com.google.gson.annotations.SerializedName;
-
-import java.util.List;
+import io.realm.RealmList;
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 /**
- * Created by excadmin on 2017/07/18.
+ * Created by excadmin on 2017/07/25.
  */
 
-public class VideoEntity {
-    @SerializedName("id")
+public class RealmVideoEntity extends RealmObject{
+
+    @PrimaryKey
     private long id;
 
-    @SerializedName("category")
     private String category;
 
-    @SerializedName("title")
     private String title;
 
-    @SerializedName("description")
     private String description;
 
-    @SerializedName("background")
     private String bgImageUrl;
 
-    @SerializedName("card")
     private String cardImageUrl;
 
-    @SerializedName("sources")
-    private List<String> videoUrl;
+    private RealmList<RealmObject> videoUrls;
 
-    @SerializedName("studio")
     private String studio;
 
     public long getId() {
@@ -81,12 +75,12 @@ public class VideoEntity {
         this.cardImageUrl = cardImageUrl;
     }
 
-    public List<String> getVideoUrl() {
-        return videoUrl;
+    public RealmList<RealmObject> getVideoUrls() {
+        return videoUrls;
     }
 
-    public void setVideoUrls(List<String> videoUrl) {
-        this.videoUrl = videoUrl;
+    public void setVideoUrls(RealmList<RealmObject> videoUrls) {
+        this.videoUrls = videoUrls;
     }
 
     public String getStudio() {

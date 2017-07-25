@@ -11,16 +11,24 @@ import java.util.List;
 public class CategoryVideoListEntity {
 
     @SerializedName("category")
-    String category;
+    private String category;
 
     @SerializedName("videos")
-    List<VideoEntity> videos;
+    private List<VideoEntity> videos;
 
     public String getCategory() {
         return category;
     }
 
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     public List<VideoEntity> getVideos() {
         return videos;
+    }
+
+    public void setVideos(List<VideoEntity> videos) {
+        this.videos = videos;
     }
 }

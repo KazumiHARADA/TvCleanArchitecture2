@@ -23,7 +23,7 @@ import android.support.v17.leanback.widget.ImageCardView;
 import android.support.v4.app.ActivityOptionsCompat;
 
 import com.example.excadmin.tvcleanarchitecture.R;
-import com.example.excadmin.tvcleanarchitecture.domain.model.Video;
+import com.example.excadmin.tvcleanarchitecture.domain.dto.Video;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.ApiRequestActivity;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.GuidedStepActivity;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.activity.PlaybackOverlayActivity;

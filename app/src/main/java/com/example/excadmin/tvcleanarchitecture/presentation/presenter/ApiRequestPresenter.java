@@ -5,7 +5,7 @@ import android.util.Log;
 
 import com.example.excadmin.tvcleanarchitecture.domain.interactor.DefaultObserver;
 import com.example.excadmin.tvcleanarchitecture.domain.interactor.GetVideoList;
-import com.example.excadmin.tvcleanarchitecture.domain.model.CategoryList;
+import com.example.excadmin.tvcleanarchitecture.domain.dto.CategoryList;
 import com.example.excadmin.tvcleanarchitecture.presentation.ui.LoadDataView;
 
 import javax.inject.Inject;

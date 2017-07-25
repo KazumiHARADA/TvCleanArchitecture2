@@ -18,7 +18,7 @@ package com.example.excadmin.tvcleanarchitecture.presentation.ui.viewpresenter;
 
 import android.support.v17.leanback.widget.AbstractDetailsDescriptionPresenter;
 
-import com.example.excadmin.tvcleanarchitecture.domain.model.Video;
+import com.example.excadmin.tvcleanarchitecture.domain.dto.Video;
 
 public class DetailsDescriptionPresenter extends AbstractDetailsDescriptionPresenter {
 

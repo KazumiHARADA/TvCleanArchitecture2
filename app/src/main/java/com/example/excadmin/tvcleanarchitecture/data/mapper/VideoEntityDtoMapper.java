@@ -1,11 +1,11 @@
-package com.example.excadmin.tvcleanarchitecture.data.entity.mapper;
+package com.example.excadmin.tvcleanarchitecture.data.mapper;
 
 import com.example.excadmin.tvcleanarchitecture.data.entity.CategoryListEntity;
 import com.example.excadmin.tvcleanarchitecture.data.entity.CategoryVideoListEntity;
 import com.example.excadmin.tvcleanarchitecture.data.entity.VideoEntity;
-import com.example.excadmin.tvcleanarchitecture.domain.model.CategoryList;
-import com.example.excadmin.tvcleanarchitecture.domain.model.CategoryVideoList;
-import com.example.excadmin.tvcleanarchitecture.domain.model.Video;
+import com.example.excadmin.tvcleanarchitecture.domain.dto.CategoryList;
+import com.example.excadmin.tvcleanarchitecture.domain.dto.CategoryVideoList;
+import com.example.excadmin.tvcleanarchitecture.domain.dto.Video;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +16,10 @@ import javax.inject.Inject;
  * Created by excadmin on 2017/07/18.
  */
 
-public class VideoEntityDataMapper {
+public class VideoEntityDtoMapper {
 
-    @Inject VideoEntityDataMapper(){}
+    @Inject
+    VideoEntityDtoMapper(){}
 
     public CategoryList transform(CategoryListEntity categoryListEntity) {
         CategoryList categoryList = null;

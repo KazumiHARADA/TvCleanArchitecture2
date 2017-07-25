@@ -3,7 +3,7 @@ package com.example.excadmin.tvcleanarchitecture;
 import android.app.Application;
 
 import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.component.ApplicationComponent;
-import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.component.DaggerApplicationComponent;
+import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.component .DaggerApplicationComponent;
 import com.example.excadmin.tvcleanarchitecture.presentation.internal.di.modules.ApplicationModule;
 
 /**
